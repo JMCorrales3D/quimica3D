@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Butano 3D</title>
+
+<script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+
+<style>
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+#viewer{
+    width:100%;
+    height:100vh;
+}
+</style>
+</head>
+
+<body>
+
+<div id="viewer"></div>
+
+<script>
+
+let viewer = $3Dmol.createViewer("viewer", {
+    backgroundColor:"white"
+});
+
+fetch("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/7843/SDF?record_type=3d")
+.then(r => r.text())
+.then(data => {
+
+    viewer.addModel(data,"sdf");
+
+    viewer.setStyle({},
+    {
+        stick:{radius:0.18},
+        sphere:{scale:0.28}
+    });
+
+    viewer.zoomTo();
+    viewer.render();
+
+});
+
+</script>
+
+</body>
+</html>
