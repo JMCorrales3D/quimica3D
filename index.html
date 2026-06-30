@@ -2,140 +2,184 @@
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Química3D</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
 
-<title>Química3D</title>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-<style>
+        body{
+            font-family:Arial, Helvetica, sans-serif;
+            background:#f8f7ff;
+            color:#333;
+            line-height:1.6;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        /* ================= CABECERA ================= */
 
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f8f7ff;
-    color:#333;
-    line-height:1.6;
-}
+        header{
+            background:#cbbbfc;
+            text-align:center;
+            padding:70px 20px;
+        }
 
-/* ================= CABECERA ================= */
+        header h1{
+            font-size:4rem;
+            margin-bottom:15px;
+        }
 
-header{
-    background:#cbbbfc;
-    padding:70px 20px;
-    text-align:center;
-}
+        header p{
+            font-size:1.4rem;
+            color:#444;
+        }
 
-header h1{
-    font-size:4rem;
-    margin-bottom:15px;
-    color:#333;
-}
+        /* ================= CONTENIDO ================= */
 
-header p{
-    font-size:1.4rem;
-    color:#444;
-}
+        main{
+            max-width:1100px;
+            margin:auto;
+            padding:60px 25px;
+        }
 
-/* ================= CONTENIDO ================= */
+        h2{
+            color:#8a6fd1;
+            margin-bottom:20px;
+        }
 
-main{
-    max-width:1100px;
-    margin:auto;
-    padding:60px 30px;
-}
+        p{
+            margin-bottom:35px;
+            font-size:1.05rem;
+        }
 
-h2{
-    color:#8a6fd1;
-    margin-bottom:20px;
-}
+        /* ================= TARJETAS ================= */
 
-main p{
-    margin-bottom:35px;
-    font-size:1.05rem;
-}
+        .tarjetas{
 
-/* ================= TARJETAS ================= */
+            display:grid;
 
-.tarjetas{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
-}
+            grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
 
-.tarjeta{
-    background:white;
-    border-radius:15px;
-    padding:30px;
-    text-align:center;
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
-    transition:.25s;
-}
+            gap:25px;
 
-.tarjeta:hover{
-    transform:translateY(-8px);
-}
+        }
 
-.tarjeta h3{
-    margin-bottom:15px;
-}
+        .tarjeta{
 
-.formula{
-    color:#666;
-    font-size:1.2rem;
-    margin-bottom:25px;
-}
+            background:white;
 
-.boton{
-    display:inline-block;
-    background:#cbbbfc;
-    color:#333;
-    text-decoration:none;
-    padding:12px 22px;
-    border-radius:10px;
-    font-weight:bold;
-    transition:.25s;
-}
+            border-radius:15px;
 
-.boton:hover{
-    background:#b39cf7;
-}
+            padding:30px;
 
-/* ================= PIE ================= */
+            text-align:center;
 
-footer{
-    margin-top:60px;
-    background:#eeeeff;
-    padding:25px;
-    text-align:center;
-    color:#666;
-    font-size:.95rem;
-}
+            box-shadow:0 6px 18px rgba(0,0,0,.08);
 
-/* ================= RESPONSIVE ================= */
+            transition:all .25s ease;
 
-@media (max-width:768px){
+        }
 
-header h1{
-    font-size:3rem;
-}
+        .tarjeta:hover{
 
-header p{
-    font-size:1.2rem;
-}
+            transform:translateY(-6px);
 
-main{
-    padding:40px 20px;
-}
+            box-shadow:0 10px 24px rgba(0,0,0,.12);
 
-}
+        }
 
-</style>
+        .tarjeta h3{
+
+            margin-bottom:15px;
+
+            color:#444;
+
+        }
+
+        .formula{
+
+            font-size:1.15rem;
+
+            color:#666;
+
+            margin-bottom:25px;
+
+        }
+
+        .boton{
+
+            display:inline-block;
+
+            padding:12px 22px;
+
+            background:#cbbbfc;
+
+            color:#333;
+
+            text-decoration:none;
+
+            border-radius:10px;
+
+            font-weight:bold;
+
+            transition:.2s;
+
+        }
+
+        .boton:hover{
+
+            background:#b39cf7;
+
+        }
+
+        /* ================= PIE ================= */
+
+        footer{
+
+            margin-top:60px;
+
+            background:#eeeeff;
+
+            padding:25px;
+
+            text-align:center;
+
+            color:#666;
+
+            font-size:.95rem;
+
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width:768px){
+
+            header h1{
+
+                font-size:3rem;
+
+            }
+
+            header p{
+
+                font-size:1.2rem;
+
+            }
+
+            main{
+
+                padding:40px 20px;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -143,63 +187,61 @@ main{
 
 <header>
 
-<h1>🧪 Química3D</h1>
+    <h1>🧪 Química3D</h1>
 
-<p>Biblioteca interactiva de moléculas en 3D</p>
+    <p>Biblioteca interactiva de moléculas en 3D</p>
 
 </header>
 
 <main>
 
-<h2>Explora la Química en tres dimensiones</h2>
+    <h2>Explora la Química en tres dimensiones</h2>
 
-<p>
+    <p>
 
-<strong>Química3D</strong> es una biblioteca interactiva de moléculas en tres dimensiones diseñada para facilitar la enseñanza y el aprendizaje de la Química. Cada modelo puede explorarse libremente desde cualquier dispositivo o integrarse fácilmente en materiales educativos como Moodle.
+        <strong>Química3D</strong> es una biblioteca interactiva de moléculas en tres dimensiones diseñada para facilitar la enseñanza y el aprendizaje de la Química. Cada modelo puede explorarse libremente desde cualquier dispositivo o integrarse fácilmente en materiales educativos como Moodle.
 
-</p>
+    </p>
 
-<h2>Moléculas disponibles</h2>
+    <h2>Moléculas disponibles</h2>
 
-<div class="tarjetas">
+    <div class="tarjetas">
 
-<div class="tarjeta">
+        <div class="tarjeta">
 
-<h3>🧪 Butano</h3>
+            <h3>🧪 Butano</h3>
 
-<div class="formula">
+            <div class="formula">
+                C₄H₁₀
+            </div>
 
-C₄H₁₀
+            <a class="boton" href="moleculas/butano.html">
+                Ver molécula
+            </a>
 
-</div>
-
-<a class="boton" href="moleculas/butano.html">
-
-Ver molécula
-
-</div>
-
-    <div class="tarjeta">
-
-        <h3>🌿 Benceno</h3>
-
-        <div class="formula">
-            C₆H₆
         </div>
 
-        <a class="boton" href="moleculas/benceno.html">
-            Ver molécula
-        </a>
+        <div class="tarjeta">
+
+            <h3>🌿 Benceno</h3>
+
+            <div class="formula">
+                C₆H₆
+            </div>
+
+            <a class="boton" href="moleculas/benceno.html">
+                Ver molécula
+            </a>
+
+        </div>
 
     </div>
-
-</div>
 
 </main>
 
 <footer>
 
-🧪 <strong>Química3D</strong> · <strong>v1.0</strong> · © 2026 · <strong>Juana M.ª Corrales</strong>
+    🧪 <strong>Química3D</strong> · <strong>v1.0</strong> · © 2026 · <strong>Juana M.ª Corrales</strong>
 
 </footer>
 
