@@ -2,10 +2,13 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Química3D</title>
+
+    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
 
     <style>
 
@@ -21,22 +24,52 @@
             line-height:1.6;
         }
 
+        /* =======================
+           CABECERA
+        ======================= */
+
         header{
+            position:relative;
+            height:430px;
+            overflow:hidden;
             background:#cbbbfc;
-            color:#333;
+        }
+
+        #heroViewer{
+            position:absolute;
+            inset:0;
+            width:100%;
+            height:100%;
+        }
+
+        .hero-text{
+            position:absolute;
+            inset:0;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            background:rgba(255,255,255,.20);
+            backdrop-filter:blur(2px);
+            z-index:10;
             text-align:center;
-            padding:60px 20px;
         }
 
-        header h1{
+        .hero-text h1{
             margin:0;
-            font-size:3.2em;
+            font-size:3.5rem;
+            color:#333;
         }
 
-        header p{
+        .hero-text p{
             margin-top:15px;
-            font-size:1.25em;
+            font-size:1.3rem;
+            color:#444;
         }
+
+        /* =======================
+           CONTENIDO
+        ======================= */
 
         main{
             max-width:1100px;
@@ -46,11 +79,6 @@
 
         h2{
             color:#8a6fd1;
-            margin-top:0;
-        }
-
-        p{
-            font-size:1.05em;
         }
 
         .tarjetas{
@@ -66,7 +94,7 @@
             padding:25px;
             text-align:center;
             box-shadow:0 4px 12px rgba(0,0,0,.08);
-            transition:all .25s ease;
+            transition:.25s;
         }
 
         .tarjeta:hover{
@@ -74,14 +102,9 @@
             box-shadow:0 8px 20px rgba(139,111,209,.20);
         }
 
-        .tarjeta h3{
-            margin-top:0;
-            color:#444;
-        }
-
         .formula{
-            font-size:1.1em;
             color:#666;
+            font-size:1.1rem;
             margin-bottom:20px;
         }
 
@@ -93,7 +116,7 @@
             padding:10px 18px;
             border-radius:8px;
             font-weight:bold;
-            transition:0.2s;
+            transition:.2s;
         }
 
         .boton:hover{
@@ -102,11 +125,11 @@
 
         footer{
             margin-top:60px;
-            padding:25px;
-            text-align:center;
             background:#eeeeff;
+            text-align:center;
+            padding:25px;
             color:#666;
-            font-size:.95em;
+            font-size:.95rem;
         }
 
     </style>
@@ -117,48 +140,92 @@
 
 <header>
 
-    <h1>🧪 Química3D</h1>
+    <div id="heroViewer"></div>
 
-    <p>Biblioteca interactiva de moléculas en 3D</p>
+    <div class="hero-text">
+
+        <h1>🧪 Química3D</h1>
+
+        <p>Biblioteca interactiva de moléculas en 3D</p>
+
+    </div>
 
 </header>
 
 <main>
 
-    <h2>Explora la Química en tres dimensiones</h2>
+<h2>Explora la Química en tres dimensiones</h2>
 
-    <p>
-        <strong>Química3D</strong> es una biblioteca interactiva de moléculas en tres dimensiones diseñada para facilitar la enseñanza y el aprendizaje de la Química. Cada modelo puede explorarse libremente desde cualquier dispositivo o integrarse fácilmente en materiales educativos como Moodle.
-    </p>
+<p>
 
-    <h2>Moléculas disponibles</h2>
+<strong>Química3D</strong> es una biblioteca interactiva de moléculas en tres dimensiones diseñada para facilitar la enseñanza y el aprendizaje de la Química. Cada modelo puede explorarse libremente desde cualquier dispositivo o integrarse fácilmente en materiales educativos como Moodle.
 
-    <div class="tarjetas">
+</p>
 
-        <div class="tarjeta">
+<h2>Moléculas disponibles</h2>
 
-            <h3>🧪 Butano</h3>
+<div class="tarjetas">
 
-            <div class="formula">
-                C₄H₁₀
-            </div>
+    <div class="tarjeta">
 
-            <a class="boton" href="moleculas/butano.html">
-                Abrir visor 3D
-            </a>
+        <h3>🧪 Butano</h3>
 
+        <div class="formula">
+            C₄H₁₀
         </div>
 
+        <a class="boton" href="moleculas/butano.html">
+            Abrir visor 3D
+        </a>
+
     </div>
+
+</div>
 
 </main>
 
 <footer>
 
-    🧪 <strong>Química3D</strong><br>
-    Proyecto educativo desarrollado por <strong>Juana M. Corrales</strong>
+🧪 <strong>Química3D</strong><br>
+
+Proyecto educativo desarrollado por Juana Mª Corrales
 
 </footer>
+
+<script>
+
+const hero = $3Dmol.createViewer("heroViewer",{
+    backgroundColor:"#cbbbfc"
+});
+
+fetch("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/241/SDF?record_type=3d")
+.then(response => response.text())
+.then(data => {
+
+    hero.addModel(data,"sdf");
+
+    hero.setStyle({},{
+        stick:{radius:0.16},
+        sphere:{scale:0.25}
+    });
+
+    hero.zoomTo();
+    hero.render();
+
+    function animar(){
+        hero.rotate(1);
+        hero.render();
+        requestAnimationFrame(animar);
+    }
+
+    animar();
+
+})
+.catch(error=>{
+    console.error(error);
+});
+
+</script>
 
 </body>
 
