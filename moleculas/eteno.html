@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Eteno | Química3D</title>
+
+<script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+
+<style>
+
+html, body{
+
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:white;
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+
+#viewer{
+
+    width:100%;
+    height:100vh;
+
+}
+
+.titulo{
+
+    position:fixed;
+    top:12px;
+    left:50%;
+    transform:translateX(-50%);
+
+    background:rgba(255,255,255,.90);
+
+    padding:8px 18px;
+
+    border-radius:10px;
+
+    font-size:20px;
+    font-weight:bold;
+
+    box-shadow:0 2px 6px rgba(0,0,0,.15);
+
+    z-index:1000;
+
+}
+
+.credito{
+
+    position:fixed;
+
+    bottom:12px;
+    right:12px;
+
+    padding:6px 10px;
+
+    background:rgba(255,255,255,.85);
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    color:#666;
+
+    font-size:13px;
+
+    box-shadow:0 2px 6px rgba(0,0,0,.15);
+
+    transition:.2s;
+
+}
+
+.credito:hover{
+
+    background:white;
+
+    color:#8a6fd1;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="titulo">
+
+Eteno (C₂H₄)
+
+</div>
+
+<div id="viewer"></div>
+
+<a
+class="credito"
+href="https://jmcorrales3d.github.io/quimica3D/"
+target="_blank">
+
+🧪 Química3D · Juana M.ª Corrales
+
+</a>
+
+<script>
+
+const viewer = $3Dmol.createViewer("viewer",{
+
+    backgroundColor:"white"
+
+});
+
+fetch("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/6325/SDF?record_type=3d")
+
+.then(response => response.text())
+
+.then(data => {
+
+    viewer.addModel(data,"sdf");
+
+    viewer.setStyle({},{
+
+        stick:{
+            radius:0.18
+        },
+
+        sphere:{
+            scale:0.25
+        }
+
+    });
+
+    viewer.zoomTo();
+
+    viewer.render();
+
+})
+
+.catch(error => {
+
+    console.error("Error al cargar la molécula:", error);
+
+});
+
+</script>
+
+</body>
+
+</html>
+```
