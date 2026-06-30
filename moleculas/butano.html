@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Butano 3D</title>
+  <title>Butano 3D - Química3D</title>
 
   <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
 
@@ -11,11 +11,27 @@
       margin: 0;
       width: 100%;
       height: 100%;
+      overflow: hidden;
+      background: white;
     }
 
     #viewer {
       width: 100%;
       height: 100vh;
+    }
+
+    .credito {
+      position: fixed;
+      bottom: 10px;
+      right: 12px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      color: #666;
+      background: rgba(255,255,255,0.8);
+      padding: 4px 8px;
+      border-radius: 6px;
+      user-select: none;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
     }
   </style>
 </head>
@@ -23,6 +39,10 @@
 <body>
 
 <div id="viewer"></div>
+
+<div class="credito">
+  🧪 Química3D · Juana Mª Corrales
+</div>
 
 <script>
 const viewer = $3Dmol.createViewer("viewer", {
@@ -33,9 +53,17 @@ fetch("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/7843/SDF?record_ty
   .then(response => response.text())
   .then(data => {
     viewer.addModel(data, "sdf");
-    viewer.setStyle({}, {stick: {}, sphere: {scale: 0.25}});
+
+    viewer.setStyle({}, {
+      stick: { radius: 0.18 },
+      sphere: { scale: 0.25 }
+    });
+
     viewer.zoomTo();
     viewer.render();
+  })
+  .catch(error => {
+    console.error("Error al cargar la molécula:", error);
   });
 </script>
 
