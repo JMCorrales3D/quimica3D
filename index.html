@@ -2,137 +2,177 @@
 <html lang="es">
 
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Química3D</title>
 
-    <title>Química3D</title>
+<script src="https://3Dmol.org/build/3Dmol-min.js"></script>
 
-    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+<style>
 
-    <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        *{
-            box-sizing:border-box;
-        }
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f8f7ff;
+    color:#333;
+    line-height:1.6;
+}
 
-        body{
-            margin:0;
-            font-family:Arial, Helvetica, sans-serif;
-            background:#f8f7ff;
-            color:#333;
-            line-height:1.6;
-        }
+/* ================= HEADER ================= */
 
-        /* =======================
-           CABECERA
-        ======================= */
+header{
 
-        header{
-            position:relative;
-            height:430px;
-            overflow:hidden;
-            background:#cbbbfc;
-        }
+    background:#cbbbfc;
+    padding:60px 8%;
+}
 
-        #heroViewer{
-            position:absolute;
-            inset:0;
-            width:100%;
-            height:100%;
-        }
+.hero{
 
-        .hero-text{
-            position:absolute;
-            inset:0;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            background:rgba(255,255,255,.20);
-            backdrop-filter:blur(2px);
-            z-index:10;
-            text-align:center;
-        }
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:50px;
+    max-width:1200px;
+    margin:auto;
+}
 
-        .hero-text h1{
-            margin:0;
-            font-size:3.5rem;
-            color:#333;
-        }
+.hero-text{
 
-        .hero-text p{
-            margin-top:15px;
-            font-size:1.3rem;
-            color:#444;
-        }
+    flex:2;
+}
 
-        /* =======================
-           CONTENIDO
-        ======================= */
+.hero-text h1{
 
-        main{
-            max-width:1100px;
-            margin:auto;
-            padding:50px 25px;
-        }
+    font-size:3.5rem;
+    margin-bottom:15px;
+}
 
-        h2{
-            color:#8a6fd1;
-        }
+.hero-text p{
 
-        .tarjetas{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:25px;
-            margin-top:30px;
-        }
+    font-size:1.35rem;
+    color:#444;
+}
 
-        .tarjeta{
-            background:white;
-            border-radius:15px;
-            padding:25px;
-            text-align:center;
-            box-shadow:0 4px 12px rgba(0,0,0,.08);
-            transition:.25s;
-        }
+#heroViewer{
 
-        .tarjeta:hover{
-            transform:translateY(-6px);
-            box-shadow:0 8px 20px rgba(139,111,209,.20);
-        }
+    flex:1;
+    height:340px;
+    border-radius:15px;
+}
 
-        .formula{
-            color:#666;
-            font-size:1.1rem;
-            margin-bottom:20px;
-        }
+/* ================= CONTENIDO ================= */
 
-        .boton{
-            display:inline-block;
-            background:#cbbbfc;
-            color:#333;
-            text-decoration:none;
-            padding:10px 18px;
-            border-radius:8px;
-            font-weight:bold;
-            transition:.2s;
-        }
+main{
 
-        .boton:hover{
-            background:#b39cf7;
-        }
+    max-width:1100px;
+    margin:auto;
+    padding:60px 30px;
+}
 
-        footer{
-            margin-top:60px;
-            background:#eeeeff;
-            text-align:center;
-            padding:25px;
-            color:#666;
-            font-size:.95rem;
-        }
+h2{
 
-    </style>
+    color:#8a6fd1;
+    margin-bottom:20px;
+}
+
+p{
+
+    margin-bottom:25px;
+}
+
+.tarjetas{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+.tarjeta{
+
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.25s;
+}
+
+.tarjeta:hover{
+
+    transform:translateY(-6px);
+}
+
+.tarjeta h3{
+
+    font-size:1.6rem;
+    margin-bottom:15px;
+}
+
+.formula{
+
+    color:#666;
+    font-size:1.2rem;
+    margin-bottom:25px;
+}
+
+.boton{
+
+    display:inline-block;
+    background:#cbbbfc;
+    color:#333;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:10px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.boton:hover{
+
+    background:#b39cf7;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+
+    margin-top:60px;
+    padding:25px;
+    background:#eeeeff;
+    text-align:center;
+    color:#666;
+}
+
+/* ================= MÓVIL ================= */
+
+@media (max-width:900px){
+
+.hero{
+
+    flex-direction:column;
+    text-align:center;
+}
+
+#heroViewer{
+
+    width:100%;
+    height:260px;
+}
+
+.hero-text h1{
+
+    font-size:2.7rem;
+}
+
+}
+
+</style>
 
 </head>
 
@@ -140,15 +180,23 @@
 
 <header>
 
-    <div id="heroViewer"></div>
+<div class="hero">
 
-    <div class="hero-text">
+<div class="hero-text">
 
-        <h1>🧪 Química3D</h1>
+<h1>🧪 Química3D</h1>
 
-        <p>Biblioteca interactiva de moléculas en 3D</p>
+<p>
 
-    </div>
+Biblioteca interactiva de moléculas en 3D
+
+</p>
+
+</div>
+
+<div id="heroViewer"></div>
+
+</div>
 
 </header>
 
@@ -166,19 +214,23 @@
 
 <div class="tarjetas">
 
-    <div class="tarjeta">
+<div class="tarjeta">
 
-        <h3>🧪 Butano</h3>
+<h3>🧪 Butano</h3>
 
-        <div class="formula">
-            C₄H₁₀
-        </div>
+<div class="formula">
 
-        <a class="boton" href="moleculas/butano.html">
-            Abrir visor 3D
-        </a>
+C₄H₁₀
 
-    </div>
+</div>
+
+<a class="boton" href="moleculas/butano.html">
+
+Ver molécula
+
+</a>
+
+</div>
 
 </div>
 
@@ -186,43 +238,38 @@
 
 <footer>
 
-🧪 <strong>Química3D</strong><br>
-
-Proyecto educativo desarrollado por Juana Mª Corrales
+🧪 <strong>Química3D</strong> · <strong>v1.0</strong> · © 2026 · <strong>Juana M.ª Corrales</strong>
 
 </footer>
 
 <script>
 
-const hero = $3Dmol.createViewer("heroViewer",{
+const viewer = $3Dmol.createViewer("heroViewer",{
+
     backgroundColor:"#cbbbfc"
+
 });
 
 fetch("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/241/SDF?record_type=3d")
-.then(response => response.text())
-.then(data => {
 
-    hero.addModel(data,"sdf");
+.then(r=>r.text())
 
-    hero.setStyle({},{
-        stick:{radius:0.16},
+.then(data=>{
+
+    viewer.addModel(data,"sdf");
+
+    viewer.setStyle({},{
+
+        stick:{radius:0.18},
+
         sphere:{scale:0.25}
+
     });
 
-    hero.zoomTo();
-    hero.render();
+    viewer.zoomTo();
 
-    function animar(){
-        hero.rotate(1);
-        hero.render();
-        requestAnimationFrame(animar);
-    }
+    viewer.render();
 
-    animar();
-
-})
-.catch(error=>{
-    console.error(error);
 });
 
 </script>
