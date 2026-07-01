@@ -1,222 +1,4 @@
 /* ==========================================
-   Química3D v2.0
-========================================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:"Inter",sans-serif;
-    background:#ffffff;
-    color:#2f2f2f;
-    line-height:1.6;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-/* ---------- CABECERA ---------- */
-
-header{
-    background:#fafbff;
-    border-bottom:1px solid #e8edf5;
-    padding:90px 30px 80px;
-    text-align:center;
-}
-
-header h1{
-    font-size:4rem;
-    font-weight:700;
-    letter-spacing:-2px;
-    margin-bottom:15px;
-}
-
-header h2{
-    font-size:1.5rem;
-    font-weight:400;
-    color:#666;
-    margin-bottom:25px;
-}
-
-header p{
-    max-width:760px;
-    margin:auto;
-    color:#666;
-}
-
-.contador{
-    display:inline-block;
-    margin-top:40px;
-    padding:14px 28px;
-    border-radius:40px;
-    background:white;
-    border:1px solid #e8edf5;
-    box-shadow:0 8px 24px rgba(0,0,0,.05);
-    font-size:.95rem;
-}
-
-.contador strong{
-    color:#2E5EAA;
-}
-
-/* ---------- CONTENIDO ---------- */
-
-main{
-    max-width:1200px;
-    margin:auto;
-    padding:80px 30px;
-}
-
-/* ---------- BUSCADOR ---------- */
-
-.buscador{
-    max-width:760px;
-    margin:0 auto 70px;
-}
-
-.buscador input{
-    width:100%;
-    padding:18px 22px;
-    border-radius:18px;
-    border:1px solid #e8edf5;
-    font-family:inherit;
-    font-size:1rem;
-    outline:none;
-    box-shadow:0 8px 24px rgba(0,0,0,.05);
-}
-
-.buscador input:focus{
-    border-color:#2E5EAA;
-}
-
-/* ---------- TITULOS ---------- */
-
-.titulo-seccion{
-    text-align:center;
-    font-size:2rem;
-    margin-bottom:45px;
-}
-
-/* ---------- CATEGORÍAS ---------- */
-
-.categorias{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:28px;
-}
-
-.categoria{
-    background:white;
-    border:1px solid #e8edf5;
-    border-radius:22px;
-    padding:30px;
-    box-shadow:0 8px 24px rgba(0,0,0,.05);
-    transition:.25s;
-}
-
-.categoria:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 30px rgba(0,0,0,.08);
-}
-
-.categoria h3{
-    color:#2E5EAA;
-    margin-bottom:10px;
-}
-
-.categoria p{
-    color:#666;
-}
-
-.proximamente{
-    background:#fafafa;
-    color:#999;
-}
-
-.proximamente:hover{
-    transform:none;
-}
-
-/* ---------- TARJETAS ---------- */
-
-.tarjetas{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:24px;
-}
-
-.card{
-    background:white;
-    border:1px solid #e8edf5;
-    border-radius:22px;
-    padding:24px;
-    text-align:center;
-    box-shadow:0 8px 24px rgba(0,0,0,.05);
-}
-
-.card h4{
-    margin-bottom:10px;
-}
-
-.formula{
-    color:#666;
-    margin-bottom:15px;
-}
-
-.boton{
-    display:inline-block;
-    margin-top:10px;
-    background:#2E5EAA;
-    color:white;
-    padding:10px 18px;
-    border-radius:10px;
-    transition:.25s;
-}
-
-.boton:hover{
-    background:#244b88;
-}
-
-/* ---------- FOOTER ---------- */
-
-footer{
-    margin-top:100px;
-    padding:40px;
-    text-align:center;
-    background:#fafbff;
-    border-top:1px solid #e8edf5;
-    color:#777;
-}
-
-/* ---------- MÓVIL ---------- */
-
-@media(max-width:768px){
-
-header h1{
-    font-size:2.8rem;
-}
-
-header h2{
-    font-size:1.2rem;
-}
-
-main{
-    padding:60px 20px;
-}
-
-.categorias{
-    grid-template-columns:1fr;
-}
-   /* ==========================================
    BARRA DE NAVEGACIÓN
 ========================================== */
 
@@ -228,15 +10,17 @@ nav{
 
     z-index:1000;
 
-    background:#ffffff;
+    background:rgba(255,255,255,.92);
 
-    border-bottom:1px solid #e8edf5;
+    backdrop-filter:blur(12px);
 
-    box-shadow:0 2px 10px rgba(0,0,0,.03);
+    -webkit-backdrop-filter:blur(12px);
+
+    border-bottom:1px solid #edf0f5;
 
 }
 
-nav .contenedor{
+.contenedor{
 
     max-width:1200px;
 
@@ -244,21 +28,31 @@ nav .contenedor{
 
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
 
-    padding:14px 30px;
+    align-items:center;
+
+    padding:18px 30px;
 
 }
 
-.logo{
+.logo a{
 
-    font-size:1.4rem;
+    font-size:1.6rem;
 
     font-weight:700;
 
     color:#2E5EAA;
+
+    letter-spacing:-1px;
+
+    transition:.2s;
+
+}
+
+.logo a:hover{
+
+    opacity:.8;
 
 }
 
@@ -266,17 +60,17 @@ nav .contenedor{
 
     display:flex;
 
-    gap:24px;
-
-    flex-wrap:wrap;
+    gap:28px;
 
 }
 
 .menu a{
 
-    color:#555;
+    color:#666;
 
     font-size:.95rem;
+
+    font-weight:500;
 
     transition:.2s;
 
@@ -298,20 +92,22 @@ nav .contenedor{
 
 @media(max-width:900px){
 
-nav .contenedor{
+    .contenedor{
 
-    flex-direction:column;
+        flex-direction:column;
 
-    gap:15px;
+        gap:18px;
 
-}
+    }
 
-.menu{
+    .menu{
 
-    justify-content:center;
+        flex-wrap:wrap;
 
-}
+        justify-content:center;
 
-}
+        gap:18px;
+
+    }
 
 }
