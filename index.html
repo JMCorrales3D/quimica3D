@@ -295,6 +295,115 @@ h2{
     font-size:1rem;
 
 }
+    /* ===========================
+   ETIQUETAS
+=========================== */
+
+.etiqueta{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:6px 14px;
+
+    margin-bottom:18px;
+
+    border-radius:20px;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+}
+
+.etiqueta::before{
+
+    content:"";
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    display:block;
+
+}
+
+/* Familias */
+
+.alcano{
+
+    background:#DDF6E4;
+
+    color:#2D6B39;
+
+}
+
+.alcano::before{
+
+    background:#63C174;
+
+}
+
+.alqueno{
+
+    background:#DCEEFF;
+
+    color:#2C6AA8;
+
+}
+
+.alqueno::before{
+
+    background:#62AFFF;
+
+}
+
+.alquino{
+
+    background:#ECDDFF;
+
+    color:#6B4BA6;
+
+}
+
+.alquino::before{
+
+    background:#A173FF;
+
+}
+
+.aromatico{
+
+    background:#FFF3C9;
+
+    color:#8A6A00;
+
+}
+
+.aromatico::before{
+
+    background:#F6C94A;
+
+}
+
+.alcohol{
+
+    background:#FFE7CF;
+
+    color:#9A5B00;
+
+}
+
+.alcohol::before{
+
+    background:#F4A64A;
+
+}
 
 .card a{
 
@@ -390,10 +499,351 @@ Explora moléculas, biomoléculas y estructuras tridimensionales para aprender Q
 
 <div class="contador">
 
-📚 35 estructuras disponibles
+📚 35 estructuras · Proyecto en crecimiento
 
 </div>
 
 </header>
 
 <main>
+  <!-- ==========================================
+     BUSCADOR
+=========================================== -->
+
+<div class="buscador">
+
+<input
+type="text"
+id="buscador"
+placeholder="🔍 Buscar estructura...">
+
+</div>
+
+<!-- ==========================================
+     EXPLORA POR CATEGORÍAS
+=========================================== -->
+
+<h2>¿Qué quieres explorar hoy?</h2>
+
+<div class="categorias">
+
+<a class="categoria" href="#organica">
+
+<h3>🧪 Química orgánica</h3>
+
+<p>Hidrocarburos, alcoholes y compuestos orgánicos.</p>
+
+</a>
+
+<a class="categoria" href="#inorganica">
+
+<h3>🌍 Química inorgánica</h3>
+
+<p>Moléculas sencillas y compuestos inorgánicos.</p>
+
+</a>
+
+<a class="categoria" href="#biomoleculas">
+
+<h3>🧬 Biomoléculas</h3>
+
+<p>Moléculas esenciales para la vida.</p>
+
+</a>
+
+<a class="categoria" href="#farmacos">
+
+<h3>💊 Fármacos</h3>
+
+<p>Medicamentos de uso cotidiano.</p>
+
+</a>
+
+<a class="categoria" href="#cotidianas">
+
+<h3>☕ Vida cotidiana</h3>
+
+<p>Moléculas presentes en alimentos y bebidas.</p>
+
+</a>
+
+<a class="categoria" href="#neuroquimica">
+
+<h3>🧠 Neuroquímica</h3>
+
+<p>Neurotransmisores y otras moléculas del sistema nervioso.</p>
+
+</a>
+
+<div class="categoria proximamente">
+
+<h3>🧊 Redes cristalinas</h3>
+
+<p>Próximamente</p>
+
+</div>
+
+<div class="categoria proximamente">
+
+<h3>⚙️ Redes metálicas</h3>
+
+<p>Próximamente</p>
+
+</div>
+
+<div class="categoria proximamente">
+
+<h3>🧵 Polímeros</h3>
+
+<p>Próximamente</p>
+
+</div>
+
+<div class="categoria proximamente">
+
+<h3>⚗️ Reacciones químicas</h3>
+
+<p>Próximamente</p>
+
+</div>
+
+<div class="categoria proximamente">
+
+<h3>🔬 Laboratorio 3D</h3>
+
+<p>Próximamente</p>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+     QUÍMICA ORGÁNICA
+=========================================== -->
+
+<section class="seccion" id="organica">
+
+<h3>🧪 Química orgánica</h3>
+
+<div class="tarjetas">  
+ <!-- Metano -->
+
+<div class="card">
+
+<h4>Metano</h4>
+
+<div class="formula">
+
+CH₄
+
+</div>
+
+<div class="etiqueta alcano">
+
+Alcano
+
+</div>
+
+<a href="moleculas/metano.html">
+
+Ver estructura
+
+</a>
+
+</div>
+
+<!-- Etano -->
+
+<div class="card">
+
+<h4>Etano</h4>
+
+<div class="formula">
+
+C₂H₆
+
+</div>
+
+<div class="etiqueta alcano">
+
+Alcano
+
+</div>
+
+<a href="moleculas/etano.html">
+
+Ver estructura
+
+</a>
+
+</div>
+
+<!-- Propano -->
+
+<div class="card">
+
+<h4>Propano</h4>
+
+<div class="formula">
+
+C₃H₈
+
+</div>
+
+<div class="etiqueta alcano">
+
+Alcano
+
+</div>
+
+<a href="moleculas/propano.html">
+
+Ver estructura
+
+</a>
+
+</div>
+
+<!-- Butano -->
+
+<div class="card">
+
+<h4>Butano</h4>
+
+<div class="formula">
+
+C₄H₁₀
+
+</div>
+
+<div class="etiqueta alcano">
+
+Alcano
+
+</div>
+
+<a href="moleculas/butano.html">
+
+Ver estructura
+
+</a>
+
+</div>
+
+<!-- Eteno -->
+
+<div class="card">
+
+<h4>Eteno</h4>
+
+<div class="formula">
+
+C₂H₄
+
+</div>
+
+<div class="etiqueta alqueno">
+
+Alqueno
+
+</div>
+
+<a href="moleculas/eteno.html">
+
+Ver estructura
+
+</a>
+
+</div>
+
+<!-- Etino -->
+
+<div class="card">
+
+<h4>Etino</h4>
+
+<div class="formula">
+
+C₂H₂
+
+</div>
+
+<div class="etiqueta alquino">
+
+Alquino
+
+</div>
+
+<a href="moleculas/etino.html">
+
+Ver estructura
+
+</a>
+
+</div>
+
+<!-- Benceno -->
+
+<div class="card">
+
+<h4>Benceno</h4>
+
+<div class="formula">
+
+C₆H₆
+
+</div>
+
+<div class="etiqueta aromatico">
+
+Aromático
+
+</div>
+
+<a href="moleculas/benceno.html">
+
+Ver estructura
+
+</a>
+
+</div>
+
+<!-- Etanol -->
+
+<div class="card">
+
+<h4>Etanol</h4>
+
+<div class="formula">
+
+C₂H₆O
+
+</div>
+
+<div class="etiqueta alcohol">
+
+Alcohol
+
+</div>
+
+<a href="moleculas/etanol.html">
+
+Ver estructura
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+     QUÍMICA INORGÁNICA
+=========================================== -->
+
+<section class="seccion" id="inorganica">
+
+<h3>🌍 Química inorgánica</h3>
+
+<div class="tarjetas">   
