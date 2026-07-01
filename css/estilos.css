@@ -1,19 +1,42 @@
-/* ==========================================
-   BARRA DE NAVEGACIÓN
-========================================== */
+/* ==========================================================
+   Química3D v2.0
+========================================================== */
+
+/* ---------- RESET ---------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:#ffffff;
+    color:#2f2f2f;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ---------- NAVEGACIÓN ---------- */
 
 nav{
 
     position:sticky;
-
     top:0;
-
     z-index:1000;
 
     background:rgba(255,255,255,.92);
 
     backdrop-filter:blur(12px);
-
     -webkit-backdrop-filter:blur(12px);
 
     border-bottom:1px solid #edf0f5;
@@ -42,9 +65,9 @@ nav{
 
     font-weight:700;
 
-    color:#2E5EAA;
-
     letter-spacing:-1px;
+
+    color:#2f2f2f;
 
     transition:.2s;
 
@@ -53,6 +76,12 @@ nav{
 .logo a:hover{
 
     opacity:.8;
+
+}
+
+.logo span{
+
+    color:#2E5EAA;
 
 }
 
@@ -90,6 +119,348 @@ nav{
 
 }
 
+/* ---------- CABECERA ---------- */
+
+header{
+
+    background:#fafbff;
+
+    border-bottom:1px solid #edf0f5;
+
+    text-align:center;
+
+    padding:90px 30px 80px;
+
+}
+
+header h1{
+
+    font-size:4rem;
+
+    font-weight:700;
+
+    letter-spacing:-2px;
+
+    margin-bottom:15px;
+
+}
+
+header h2{
+
+    font-size:1.45rem;
+
+    font-weight:400;
+
+    color:#666;
+
+    margin-bottom:25px;
+
+}
+
+header p{
+
+    max-width:760px;
+
+    margin:auto;
+
+    color:#666;
+
+    font-size:1.05rem;
+
+}
+
+/* ---------- CONTADOR ---------- */
+
+.contador{
+
+    display:inline-block;
+
+    margin-top:40px;
+
+    padding:14px 28px;
+
+    background:white;
+
+    border-radius:40px;
+
+    border:1px solid #edf0f5;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.05);
+
+    font-size:.95rem;
+
+}
+
+.contador strong{
+
+    color:#2E5EAA;
+
+    font-size:1.2rem;
+
+}
+
+/* ---------- CONTENIDO ---------- */
+
+main{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:80px 30px;
+
+}
+
+/* ---------- BUSCADOR ---------- */
+
+.buscador{
+
+    max-width:760px;
+
+    margin:0 auto 70px;
+
+}
+
+.buscador input{
+
+    width:100%;
+
+    padding:18px 22px;
+
+    border-radius:18px;
+
+    border:1px solid #edf0f5;
+
+    outline:none;
+
+    font-family:inherit;
+
+    font-size:1rem;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.05);
+
+    transition:.2s;
+
+}
+
+.buscador input:focus{
+
+    border-color:#2E5EAA;
+
+    box-shadow:0 0 0 4px rgba(46,94,170,.12);
+
+}
+
+/* ---------- TÍTULOS ---------- */
+
+.titulo-seccion{
+
+    text-align:center;
+
+    font-size:2rem;
+
+    margin-bottom:50px;
+
+}
+
+/* ---------- CATEGORÍAS ---------- */
+
+.categorias{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:28px;
+
+}
+
+.categoria{
+
+    background:white;
+
+    border:1px solid #edf0f5;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.05);
+
+    transition:.25s;
+
+}
+
+.categoria:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 16px 32px rgba(0,0,0,.08);
+
+}
+
+.categoria h3{
+
+    color:#2E5EAA;
+
+    margin-bottom:12px;
+
+}
+
+.categoria p{
+
+    color:#666;
+
+}
+
+.proximamente{
+
+    background:#fafafa;
+
+    color:#999;
+
+}
+
+.proximamente:hover{
+
+    transform:none;
+
+}
+
+/* ---------- TARJETAS ---------- */
+
+.tarjetas{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:24px;
+
+}
+
+.card{
+
+    background:white;
+
+    border:1px solid #edf0f5;
+
+    border-radius:22px;
+
+    padding:26px;
+
+    text-align:center;
+
+    box-shadow:0 8px 24px rgba(0,0,0,.05);
+
+    transition:.25s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.card h4{
+
+    font-size:1.25rem;
+
+    margin-bottom:12px;
+
+}
+
+.formula{
+
+    color:#666;
+
+    margin-bottom:18px;
+
+}
+
+/* ---------- ETIQUETAS ---------- */
+
+.etiqueta{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:6px 14px;
+
+    margin-bottom:18px;
+
+    border-radius:20px;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+}
+
+.etiqueta::before{
+
+    content:"";
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+}
+
+/* ---------- BOTÓN ---------- */
+
+.boton{
+
+    display:inline-block;
+
+    margin-top:10px;
+
+    padding:10px 18px;
+
+    border-radius:10px;
+
+    background:#2E5EAA;
+
+    color:white;
+
+    font-weight:500;
+
+    transition:.2s;
+
+}
+
+.boton:hover{
+
+    background:#234d90;
+
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+
+    margin-top:100px;
+
+    padding:40px;
+
+    text-align:center;
+
+    color:#777;
+
+    background:#fafbff;
+
+    border-top:1px solid #edf0f5;
+
+}
+
+/* ---------- RESPONSIVE ---------- */
+
 @media(max-width:900px){
 
     .contenedor{
@@ -107,6 +478,40 @@ nav{
         justify-content:center;
 
         gap:18px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    header{
+
+        padding:70px 20px 60px;
+
+    }
+
+    header h1{
+
+        font-size:2.8rem;
+
+    }
+
+    header h2{
+
+        font-size:1.2rem;
+
+    }
+
+    main{
+
+        padding:60px 20px;
+
+    }
+
+    .categorias{
+
+        grid-template-columns:1fr;
 
     }
 
