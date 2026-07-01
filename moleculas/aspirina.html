@@ -1,87 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aspirina | Química3D</title>
+<title>Aspirina - Química3D</title>
 
-<script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.0.4/3Dmol-min.js"></script>
 
 <style>
 
-html, body{
+body{
 
     margin:0;
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:white;
-    font-family:Arial, Helvetica, sans-serif;
+
+    font-family:Arial, sans-serif;
+
+    background:#f5f5f5;
+
+    text-align:center;
+
+}
+
+h1{
+
+    margin:20px 0 10px;
 
 }
 
 #viewer{
 
     width:100%;
-    height:100vh;
+
+    height:80vh;
 
 }
 
-.titulo{
+a{
 
-    position:fixed;
-    top:12px;
-    left:50%;
-    transform:translateX(-50%);
+    display:inline-block;
 
-    background:rgba(255,255,255,.90);
+    margin:20px;
 
-    padding:8px 18px;
-
-    border-radius:10px;
-
-    font-size:20px;
-    font-weight:bold;
-
-    box-shadow:0 2px 6px rgba(0,0,0,.15);
-
-    z-index:1000;
-
-}
-
-.credito{
-
-    position:fixed;
-
-    bottom:12px;
-    right:12px;
-
-    padding:6px 10px;
-
-    background:rgba(255,255,255,.85);
-
-    border-radius:8px;
+    color:#2E5EAA;
 
     text-decoration:none;
 
-    color:#666;
-
-    font-size:13px;
-
-    box-shadow:0 2px 6px rgba(0,0,0,.15);
-
-    transition:.2s;
-
-}
-
-.credito:hover{
-
-    background:white;
-
-    color:#8a6fd1;
+    font-weight:bold;
 
 }
 
@@ -91,65 +57,56 @@ html, body{
 
 <body>
 
-<div class="titulo">
+<h1>Aspirina</h1>
 
-Aspirina (C₉H₈O₄)
-
-</div>
+<p>Ácido acetilsalicílico (C₉H₈O₄)</p>
 
 <div id="viewer"></div>
 
-<a
-class="credito"
-href="https://jmcorrales3d.github.io/quimica3D/"
-target="_blank">
-
-🧪 Química3D · Juana M.ª Corrales
-
-</a>
+<a href="../farmacos.html">← Volver a Fármacos</a>
 
 <script>
 
-const viewer = $3Dmol.createViewer("viewer",{
+let viewer = $3Dmol.createViewer("viewer",{
 
     backgroundColor:"white"
 
 });
 
-fetch("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/CID/2244/SDF?record_type=3d")
+const pdb = `
 
-.then(response => response.text())
+HETATM    1  C1  UNL     1      -2.722   0.235   0.001  1.00  0.00           C
+HETATM    2  C2  UNL     1      -1.340   0.176   0.000  1.00  0.00           C
+HETATM    3  C3  UNL     1      -0.615  -1.019  -0.001  1.00  0.00           C
+HETATM    4  C4  UNL     1       0.767  -1.078  -0.002  1.00  0.00           C
+HETATM    5  C5  UNL     1       1.492   0.118  -0.001  1.00  0.00           C
+HETATM    6  C6  UNL     1       0.110   0.177   0.000  1.00  0.00           C
+HETATM    7  C7  UNL     1       2.978   0.057  -0.002  1.00  0.00           C
+HETATM    8  O1  UNL     1       3.594   1.147  -0.003  1.00  0.00           O
+HETATM    9  O2  UNL     1       3.610  -1.101  -0.002  1.00  0.00           O
+HETATM   10  C8  UNL     1       5.051  -1.136  -0.003  1.00  0.00           C
+HETATM   11  C9  UNL     1      -0.646   1.489   0.002  1.00  0.00           C
+HETATM   12  O3  UNL     1      -1.975   1.463   0.002  1.00  0.00           O
+HETATM   13  O4  UNL     1       0.078   2.577   0.004  1.00  0.00           O
+END
 
-.then(data => {
+`;
 
-    viewer.addModel(data,"sdf");
+viewer.addModel(pdb,"pdb");
 
-    viewer.setStyle({},{
+viewer.setStyle({},{
 
-        stick:{
-            radius:0.18
-        },
+    stick:{},
 
-        sphere:{
-            scale:0.25
-        }
-
-    });
-
-    viewer.zoomTo();
-
-    viewer.render();
-
-})
-
-.catch(error => {
-
-    console.error("Error al cargar la molécula:", error);
+    sphere:{scale:0.28}
 
 });
+
+viewer.zoomTo();
+
+viewer.render();
 
 </script>
 
 </body>
-
 </html>
