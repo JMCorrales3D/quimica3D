@@ -29,7 +29,9 @@ a {
 }
 
 
-/* ---------- NAVEGACIÓN ---------- */
+/* ==========================================================
+   NAVEGACIÓN
+========================================================== */
 
 nav {
     position: sticky;
@@ -95,7 +97,9 @@ nav {
 }
 
 
-/* ---------- CABECERA ---------- */
+/* ==========================================================
+   CABECERA
+========================================================== */
 
 header {
     background: #fafbff;
@@ -110,6 +114,7 @@ header h1 {
     font-size: 4rem;
     font-weight: 700;
     letter-spacing: -2px;
+
     margin-bottom: 15px;
 }
 
@@ -117,6 +122,7 @@ header h2 {
     font-size: 1.45rem;
     font-weight: 400;
     color: #666;
+
     margin-bottom: 25px;
 }
 
@@ -129,7 +135,9 @@ header p {
 }
 
 
-/* ---------- CONTADOR ---------- */
+/* ==========================================================
+   CONTADOR
+========================================================== */
 
 .contador {
     display: inline-block;
@@ -139,6 +147,7 @@ header p {
 
     background: white;
     border-radius: 40px;
+
     border: 1px solid #edf0f5;
 
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
@@ -152,7 +161,9 @@ header p {
 }
 
 
-/* ---------- CONTENIDO GENERAL ---------- */
+/* ==========================================================
+   CONTENIDO GENERAL
+========================================================== */
 
 main {
     max-width: 1200px;
@@ -162,7 +173,9 @@ main {
 }
 
 
-/* ---------- BUSCADOR ---------- */
+/* ==========================================================
+   BUSCADOR
+========================================================== */
 
 .buscador {
     max-width: 760px;
@@ -195,7 +208,9 @@ main {
 }
 
 
-/* ---------- TÍTULOS ---------- */
+/* ==========================================================
+   TÍTULOS
+========================================================== */
 
 .titulo-seccion {
     text-align: center;
@@ -206,7 +221,9 @@ main {
 }
 
 
-/* ---------- CATEGORÍAS ---------- */
+/* ==========================================================
+   CATEGORÍAS
+========================================================== */
 
 .categorias {
     display: grid;
@@ -242,6 +259,7 @@ main {
 
 .categoria h3 {
     color: #2E5EAA;
+
     margin-bottom: 12px;
 }
 
@@ -250,7 +268,9 @@ main {
 }
 
 
-/* ---------- PRÓXIMAMENTE ---------- */
+/* ==========================================================
+   PRÓXIMAMENTE
+========================================================== */
 
 .proximamente {
     background: #fafafa;
@@ -262,7 +282,9 @@ main {
 }
 
 
-/* ---------- TARJETAS ---------- */
+/* ==========================================================
+   TARJETAS
+========================================================== */
 
 .tarjetas {
     display: grid;
@@ -295,16 +317,20 @@ main {
 
 .card h4 {
     font-size: 1.25rem;
+
     margin-bottom: 12px;
 }
 
 .formula {
     color: #666;
+
     margin-bottom: 18px;
 }
 
 
-/* ---------- ETIQUETAS ---------- */
+/* ==========================================================
+   ETIQUETAS
+========================================================== */
 
 .etiqueta {
     display: inline-flex;
@@ -331,7 +357,9 @@ main {
 }
 
 
-/* ---------- BOTÓN ---------- */
+/* ==========================================================
+   BOTÓN
+========================================================== */
 
 .boton {
     display: inline-block;
@@ -359,40 +387,25 @@ main {
    CONTENIDOS DE LOS TEMAS
 ========================================================== */
 
-
-/* ---------- CONTENEDOR DEL CONTENIDO ---------- */
-
 .contenido-tema {
-    max-width: 1000px;
-
+    max-width: 900px;
     margin: 0 auto;
-}
-
-
-/* ---------- TÍTULO DEL CONTENIDO ---------- */
-
-.contenido-tema h2 {
-    font-size: 2rem;
-
-    margin-bottom: 30px;
-
-    color: #2f2f2f;
 }
 
 
 /* ---------- PÁRRAFOS ---------- */
 
 .contenido-tema p {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 
-    line-height: 1.7;
+    line-height: 1.8;
 }
 
 
 /* ---------- IMÁGENES ---------- */
 
 .iedib-figura {
-    margin: 45px auto 50px;
+    margin: 50px auto 45px;
 
     text-align: center;
 }
@@ -400,8 +413,8 @@ main {
 .iedib-figura img {
     display: block;
 
-    width: 70%;
-    max-width: 700px;
+    width: 55%;
+    max-width: 550px;
 
     height: auto;
 
@@ -414,11 +427,15 @@ main {
 /* ---------- PIE DE IMAGEN ---------- */
 
 .iedib-img-footer {
-    margin-top: 12px;
+    max-width: 550px;
+
+    margin: 14px auto 0;
+
+    text-align: center;
 
     font-size: 0.85rem;
 
-    line-height: 1.4;
+    line-height: 1.5;
 
     color: #666;
 }
@@ -427,20 +444,26 @@ main {
 /* ---------- FUENTE ---------- */
 
 .fuente {
-    margin-top: 30px;
+    margin: 35px auto 0;
+
+    text-align: center;
 
     font-size: 0.85rem;
+
+    line-height: 1.5;
 
     color: #777;
 }
 
 
-/* ---------- NAVEGACIÓN ENTRE APARTADOS ---------- */
+/* ==========================================================
+   NAVEGACIÓN ENTRE APARTADOS
+========================================================== */
 
 .navegacion-tema {
-    max-width: 1000px;
+    max-width: 900px;
 
-    margin: 80px auto 30px;
+    margin: 100px auto 20px;
 
     padding-top: 30px;
 
@@ -448,11 +471,12 @@ main {
 
     display: flex;
 
-    justify-content: space-between;
-
+    justify-content: center;
     align-items: center;
 
-    gap: 30px;
+    gap: 80px;
+
+    text-align: center;
 }
 
 .navegacion-tema a {
@@ -468,7 +492,9 @@ main {
 }
 
 
-/* ---------- ÍNDICE DEL TEMA ---------- */
+/* ==========================================================
+   ÍNDICE DEL TEMA
+========================================================== */
 
 .indice-tema {
     margin-top: 70px;
@@ -517,6 +543,10 @@ footer {
 }
 
 
+/* ==========================================================
+   TABLETS Y MÓVILES
+========================================================== */
+
 @media (max-width: 768px) {
 
     header {
@@ -544,24 +574,24 @@ footer {
     }
 
     .iedib-figura img {
-        width: 100%;
-        max-width: 100%;
+        width: 85%;
+        max-width: 450px;
     }
 
     .navegacion-tema {
         flex-direction: column;
 
-        align-items: stretch;
+        gap: 20px;
 
-        text-align: center;
-
-        margin-top: 60px;
+        margin-top: 70px;
     }
 
 }
 
 
-/* ---------- MÓVILES PEQUEÑOS ---------- */
+/* ==========================================================
+   MÓVILES PEQUEÑOS
+========================================================== */
 
 @media (max-width: 480px) {
 
