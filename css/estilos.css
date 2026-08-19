@@ -518,3 +518,34 @@ footer{
 .contenido-tema {
     margin-top: 70px;
 }
+/* Imágenes de los contenidos */
+
+.iedib-figura {
+    margin: 30px auto 40px auto;
+    text-align: center;
+}
+
+.iedib-figura img {
+    display: block;
+    width: auto;
+    max-width: 75%;
+    max-height: 500px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 12px;
+}
+
+.iedib-img-footer {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.fuente {
+    margin-top: 25px;
+    font-size: 0.85rem;
+    color: #777;
+}
+   .contenido-tema p {
+    margin-bottom: 18px;
+}
