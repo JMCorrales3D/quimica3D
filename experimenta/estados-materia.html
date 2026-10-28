@@ -1,0 +1,226 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Simulación interactiva de los estados sólido, líquido y gaseoso. Química3D.">
+<title>Estados de la materia | Química3D</title>
+
+<style>
+:root {
+  --blue: #2f63b7;
+  --blue-dark: #244f91;
+  --ink: #30343b;
+  --muted: #667085;
+  --line: #e5eaf2;
+  --background: #f7f9fd;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--ink);
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(35,55,90,.07);
+  overflow: hidden;
+}
+
+header {
+  padding: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  color: var(--blue);
+  font-size: .85rem;
+  font-weight: bold;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin: 10px 0;
+}
+
+header p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px 24px 10px;
+}
+
+button {
+  background: white;
+  border: 1px solid #d7dfec;
+  border-radius: 9px;
+  color: var(--blue-dark);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 11px 20px;
+}
+
+button:hover {
+  background: #eef4ff;
+}
+
+button[aria-pressed="true"] {
+  background: var(--blue);
+  color: white;
+  border-color: var(--blue);
+}
+
+button:focus-visible {
+  outline: 3px solid #8bb5ff;
+  outline-offset: 3px;
+}
+
+.scene {
+  position: relative;
+  height: 320px;
+  margin: 12px 24px 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: linear-gradient(#fbfdff, #f2f6fc);
+}
+
+.scene-label {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  background: white;
+  color: var(--blue-dark);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 7px 10px;
+  font-size: .9rem;
+  font-weight: bold;
+}
+
+.particle {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #3c75cb;
+  box-shadow: inset -2px -2px 3px rgba(0,0,0,.15);
+}
+
+.particle:nth-of-type(3n) { background: #6d9be0; }
+.particle:nth-of-type(4n) { background: #244f91; }
+
+.explanation {
+  margin: 20px 24px 24px;
+  padding: 18px;
+  background: #f8faff;
+  border: 1px solid #e2eafa;
+  border-radius: 12px;
+}
+
+h2 {
+  color: var(--blue-dark);
+  font-size: 1.25rem;
+  margin: 0 0 10px;
+}
+
+.explanation p {
+  line-height: 1.6;
+  margin: 0;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.fact {
+  padding: 12px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  line-height: 1.5;
+}
+
+.fact strong {
+  display: block;
+  color: var(--blue);
+  font-size: .8rem;
+  margin-bottom: 5px;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 15px 24px;
+  text-align: right;
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+footer strong { color: var(--blue); }
+
+@media (max-width: 600px) {
+  body { padding: 8px; }
+  header { padding: 18px; }
+  .controls { padding: 16px 14px 8px; }
+  button { flex: 1; padding: 10px; }
+  .scene { margin: 12px 14px 0; height: 280px; }
+  .explanation { margin: 14px; }
+  .facts { grid-template-columns: 1fr; }
+  footer { padding: 14px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<main class="card">
+
+<header>
+  <div class="brand">Química3D · Ciencias Generales</div>
+  <h1>Los estados de la materia</h1>
+  <p>Explora cómo se distribuyen y se mueven las partículas en los estados sólido, líquido y gaseoso.</p>
+</header>
+
+<nav class="controls" aria-label="Selecciona un estado de la materia">
+  <button type="button" data-state="solid" aria-pressed="true">Sólido</button>
+  <button type="button" data-state="liquid" aria-pressed="false">Líquido</button>
+  <button type="button" data-state="gas" aria-pressed="false">Gas</button>
+</nav>
+
+<div id="scene" class="scene" role="img" aria-label="Modelo de partículas">
+  <div class="scene-label" id="sceneLabel">Estado sólido</div>
+</div>
+
+<section class="explanation" aria-live="polite">
+  <h2 id="stateTitle">Sólido</h2>
+  <p id="description">Las partículas están muy próximas y ocupan posiciones relativamente fijas. No se desplazan libremente, pero vibran continuamente.</p>
+
+  <div class="facts">
+    <div class="fact">
+     
