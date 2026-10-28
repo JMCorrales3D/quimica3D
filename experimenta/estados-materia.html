@@ -1,226 +1,507 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Simulación interactiva de los estados sólido, líquido y gaseoso. Química3D.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Estados de la materia | Química3D</title>
 
-<style>
-:root {
-  --blue: #2f63b7;
-  --blue-dark: #244f91;
-  --ink: #30343b;
-  --muted: #667085;
-  --line: #e5eaf2;
-  --background: #f7f9fd;
-}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/estilos.css">
 
+<style>
 * { box-sizing: border-box; }
 
 body {
-  margin: 0;
-  padding: 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--background);
-  color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    color: #172b4d;
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
+.contenido-estados {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 35px 24px 50px;
 }
 
-.card {
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  box-shadow: 0 5px 18px rgba(35,55,90,.07);
-  overflow: hidden;
+.etiqueta {
+    color: #2165c5;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    margin-bottom: 12px;
 }
 
-header {
-  padding: 24px;
-  border-bottom: 1px solid var(--line);
+.contenido-estados h1 {
+    font-size: clamp(30px, 5vw, 44px);
+    margin: 0 0 12px;
 }
 
-.brand {
-  color: var(--blue);
-  font-size: .85rem;
-  font-weight: bold;
-  letter-spacing: .05em;
-  text-transform: uppercase;
+.introduccion {
+    color: #52627a;
+    font-size: 17px;
+    line-height: 1.6;
+    margin-bottom: 25px;
 }
 
-h1 {
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
-  margin: 10px 0;
+.botones-estados {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
 }
 
-header p {
-  color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 0;
+.boton-estado {
+    flex: 1;
+    min-width: 130px;
+    padding: 14px 20px;
+    border: 1px solid #cbd8eb;
+    border-radius: 11px;
+    background: white;
+    color: #173b78;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s, color .2s, transform .2s;
 }
 
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 20px 24px 10px;
+.boton-estado:hover {
+    transform: translateY(-2px);
+    border-color: #2165c5;
 }
 
-button {
-  background: white;
-  border: 1px solid #d7dfec;
-  border-radius: 9px;
-  color: var(--blue-dark);
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 11px 20px;
+.boton-estado.activo {
+    background: #2165c5;
+    border-color: #2165c5;
+    color: white;
 }
 
-button:hover {
-  background: #eef4ff;
+.panel-simulacion {
+    background: #f4f8ff;
+    border: 1px solid #d6e2f3;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
 }
 
-button[aria-pressed="true"] {
-  background: var(--blue);
-  color: white;
-  border-color: var(--blue);
+.cabecera-simulacion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 17px 20px 0;
 }
 
-button:focus-visible {
-  outline: 3px solid #8bb5ff;
-  outline-offset: 3px;
+.nombre-estado {
+    background: white;
+    border: 1px solid #d1def0;
+    border-radius: 9px;
+    padding: 8px 13px;
+    font-weight: 600;
 }
 
-.scene {
-  position: relative;
-  height: 320px;
-  margin: 12px 24px 0;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: linear-gradient(#fbfdff, #f2f6fc);
+.indicacion {
+    font-size: 12px;
+    color: #65758d;
 }
 
-.scene-label {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 2;
-  background: white;
-  color: var(--blue-dark);
-  border: 1px solid var(--line);
-  border-radius: 7px;
-  padding: 7px 10px;
-  font-size: .9rem;
-  font-weight: bold;
+#simulacion {
+    display: block;
+    width: 100%;
+    height: 310px;
 }
 
-.particle {
-  position: absolute;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: #3c75cb;
-  box-shadow: inset -2px -2px 3px rgba(0,0,0,.15);
+.informacion {
+    background: #edf5ff;
+    border: 1px solid #c9ddff;
+    border-radius: 15px;
+    padding: 23px;
+    margin-bottom: 22px;
 }
 
-.particle:nth-of-type(3n) { background: #6d9be0; }
-.particle:nth-of-type(4n) { background: #244f91; }
-
-.explanation {
-  margin: 20px 24px 24px;
-  padding: 18px;
-  background: #f8faff;
-  border: 1px solid #e2eafa;
-  border-radius: 12px;
+.informacion h2 {
+    color: #1749a2;
+    font-size: 30px;
+    margin: 0 0 10px;
 }
 
-h2 {
-  color: var(--blue-dark);
-  font-size: 1.25rem;
-  margin: 0 0 10px;
+.informacion > p {
+    margin: 0;
+    line-height: 1.7;
+    max-width: 850px;
 }
 
-.explanation p {
-  line-height: 1.6;
-  margin: 0;
+.detalles {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+    margin-top: 20px;
 }
 
-.facts {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 16px;
+.detalle {
+    background: white;
+    border: 1px solid #dfe7f2;
+    border-radius: 12px;
+    padding: 18px;
 }
 
-.fact {
-  padding: 12px;
-  background: white;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  line-height: 1.5;
+.detalle h3 {
+    color: #2165c5;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin: 0 0 9px;
 }
 
-.fact strong {
-  display: block;
-  color: var(--blue);
-  font-size: .8rem;
-  margin-bottom: 5px;
+.detalle p {
+    margin: 0;
+    line-height: 1.6;
+    font-size: 14px;
 }
 
-footer {
-  border-top: 1px solid var(--line);
-  padding: 15px 24px;
-  text-align: right;
-  font-size: .85rem;
-  color: var(--muted);
+.aviso-modelo {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #65758d;
+    margin-top: 18px;
 }
 
-footer strong { color: var(--blue); }
-
-@media (max-width: 600px) {
-  body { padding: 8px; }
-  header { padding: 18px; }
-  .controls { padding: 16px 14px 8px; }
-  button { flex: 1; padding: 10px; }
-  .scene { margin: 12px 14px 0; height: 280px; }
-  .explanation { margin: 14px; }
-  .facts { grid-template-columns: 1fr; }
-  footer { padding: 14px; }
+@media (max-width: 700px) {
+    .contenido-estados { padding: 25px 16px 35px; }
+    .detalles { grid-template-columns: 1fr; }
+    #simulacion { height: 270px; }
+    .boton-estado { min-width: 95px; padding: 12px 10px; }
 }
 </style>
 </head>
 
 <body>
-<div class="container">
-<main class="card">
 
-<header>
-  <div class="brand">Química3D </div>
-  <h1>Los estados de la materia</h1>
-  <p>Explora cómo se distribuyen y se mueven las partículas en los estados sólido, líquido y gaseoso.</p>
-</header>
+<nav>
+    <div class="contenedor">
+        <div class="logo">
+            <a href="../index.html">Química<span>3D</span></a>
+        </div>
 
-<nav class="controls" aria-label="Selecciona un estado de la materia">
-  <button type="button" data-state="solid" aria-pressed="true">Sólido</button>
-  <button type="button" data-state="liquid" aria-pressed="false">Líquido</button>
-  <button type="button" data-state="gas" aria-pressed="false">Gas</button>
+        <div class="menu">
+            <a href="../index.html">Inicio</a>
+            <a href="../estructuras/index.html">Estructuras químicas</a>
+            <a href="../quimica/index.html">Química</a>
+            <a href="index.html" class="activo">Experimenta</a>
+            <a href="../sobre/index.html">Sobre</a>
+        </div>
+    </div>
 </nav>
 
-<div id="scene" class="scene" role="img" aria-label="Modelo de partículas">
-  <div class="scene-label" id="sceneLabel">Estado sólido</div>
-</div>
+<main class="contenido-estados">
 
-<section class="explanation" aria-live="polite">
-  <h2 id="stateTitle">Sólido</h2>
-  <p id="description">Las partículas están muy próximas y ocupan posiciones relativamente fijas. No se desplazan libremente, pero vibran continuamente.</p>
+    <div class="etiqueta">QUÍMICA3D · CIENCIAS GENERALES</div>
 
-  <div class="facts">
-    <div class="fact">
-     
+    <h1>Los estados de la materia</h1>
+
+    <p class="introduccion">
+        Explora cómo se distribuyen y se mueven las partículas en los estados
+        sólido, líquido y gaseoso. Pulsa los botones para cambiar de estado.
+    </p>
+
+    <div class="botones-estados" role="group" aria-label="Seleccionar estado de la materia">
+        <button type="button" class="boton-estado activo" data-estado="solido" aria-pressed="true">Sólido</button>
+        <button type="button" class="boton-estado" data-estado="liquido" aria-pressed="false">Líquido</button>
+        <button type="button" class="boton-estado" data-estado="gas" aria-pressed="false">Gas</button>
+    </div>
+
+    <section class="panel-simulacion" aria-label="Simulación animada de partículas">
+        <div class="cabecera-simulacion">
+            <span class="nombre-estado" id="nombreSimulacion">Estado sólido</span>
+            <span class="indicacion">Modelo de partículas · Animación interactiva</span>
+        </div>
+        <canvas id="simulacion" aria-label="Partículas en movimiento según el estado seleccionado"></canvas>
+    </section>
+
+    <section class="informacion" aria-live="polite">
+        <h2 id="tituloEstado">Sólido</h2>
+        <p id="descripcionEstado">
+            Las partículas están muy próximas y ocupan posiciones relativamente
+            fijas. No se desplazan libremente, pero vibran continuamente.
+        </p>
+
+        <div class="detalles">
+            <article class="detalle">
+                <h3>DISPOSICIÓN</h3>
+                <p id="disposicion">
+                    Partículas muy próximas y ordenadas en este modelo.
+                </p>
+            </article>
+
+            <article class="detalle">
+                <h3>MOVIMIENTO</h3>
+                <p id="movimiento">
+                    Vibran alrededor de posiciones relativamente fijas.
+                </p>
+            </article>
+
+            <article class="detalle">
+                <h3>PROPIEDADES</h3>
+                <p id="propiedades">
+                    Tiene forma propia y volumen prácticamente constante.
+                </p>
+            </article>
+        </div>
+
+        <p class="aviso-modelo">
+            Este es un modelo simplificado: las partículas no se representan
+            a escala real. En los sólidos, no todas las estructuras están
+            ordenadas como una red cristalina.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    Química<span style="color:#2E5EAA;">3D</span> · Juana M.ª Corrales
+</footer>
+
+<script src="../js/script.js"></script>
+
+<script>
+(() => {
+    const canvas = document.getElementById('simulacion');
+    const ctx = canvas.getContext('2d');
+
+    const botones = document.querySelectorAll('.boton-estado');
+    const nombre = document.getElementById('nombreSimulacion');
+    const titulo = document.getElementById('tituloEstado');
+    const descripcion = document.getElementById('descripcionEstado');
+    const disposicion = document.getElementById('disposicion');
+    const movimiento = document.getElementById('movimiento');
+    const propiedades = document.getElementById('propiedades');
+
+    const total = 48;
+    let particulas = [];
+    let estado = 'solido';
+    let ancho = 0;
+    let alto = 0;
+    let ultimoTiempo = 0;
+    let animacionActiva = true;
+
+    const textos = {
+        solido: {
+            nombre: 'Estado sólido',
+            titulo: 'Sólido',
+            descripcion: 'Las partículas están muy próximas y ocupan posiciones relativamente fijas. No se desplazan libremente, pero vibran continuamente.',
+            disposicion: 'Partículas muy próximas y ordenadas en este modelo.',
+            movimiento: 'Vibran alrededor de posiciones relativamente fijas.',
+            propiedades: 'Tiene forma propia y volumen prácticamente constante.'
+        },
+        liquido: {
+            nombre: 'Estado líquido',
+            titulo: 'Líquido',
+            descripcion: 'Las partículas permanecen próximas, pero no ocupan posiciones fijas. Pueden desplazarse y cambiar de vecinas.',
+            disposicion: 'Partículas próximas, sin una ordenación fija.',
+            movimiento: 'Se desplazan y se deslizan unas entre otras.',
+            propiedades: 'Tiene volumen prácticamente constante y adopta la forma del recipiente.'
+        },
+        gas: {
+            nombre: 'Estado gaseoso',
+            titulo: 'Gas',
+            descripcion: 'Las partículas están muy separadas y se mueven rápidamente en distintas direcciones, chocando entre sí y con las paredes.',
+            disposicion: 'Partículas muy separadas que ocupan todo el recipiente.',
+            movimiento: 'Se desplazan libremente en todas las direcciones.',
+            propiedades: 'No tiene forma ni volumen propios; es compresible.'
+        }
+    };
+
+    function aleatorio(min, max) {
+        return min + Math.random() * (max - min);
+    }
+
+    function prepararCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        ancho = rect.width;
+        alto = rect.height;
+
+        canvas.width = Math.round(ancho * dpr);
+        canvas.height = Math.round(alto * dpr);
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        crearParticulas();
+    }
+
+    function crearParticulas() {
+        particulas = [];
+
+        const radio = ancho < 500 ? 5.5 : 7;
+        const columnas = 8;
+        const filas = 6;
+        const espacioX = Math.min(49, (ancho - 50) / columnas);
+        const espacioY = Math.min(42, (alto - 45) / filas);
+        const bloqueAncho = espacioX * (columnas - 1);
+        const bloqueAlto = espacioY * (filas - 1);
+        const inicioX = (ancho - bloqueAncho) / 2;
+        const inicioY = (alto - bloqueAlto) / 2 + 8;
+
+        for (let i = 0; i < total; i++) {
+            const fila = Math.floor(i / columnas);
+            const columna = i % columnas;
+
+            particulas.push({
+                x: aleatorio(25, ancho - 25),
+                y: aleatorio(25, alto - 25),
+                vx: aleatorio(-45, 45),
+                vy: aleatorio(-45, 45),
+                radio,
+                baseX: inicioX + columna * espacioX,
+                baseY: inicioY + fila * espacioY,
+                fase: Math.random() * Math.PI * 2,
+                semilla: Math.random()
+            });
+        }
+    }
+
+    function cambiarEstado(nuevoEstado) {
+        estado = nuevoEstado;
+
+        botones.forEach(boton => {
+            const activo = boton.dataset.estado === estado;
+            boton.classList.toggle('activo', activo);
+            boton.setAttribute('aria-pressed', String(activo));
+        });
+
+        const texto = textos[estado];
+        nombre.textContent = texto.nombre;
+        titulo.textContent = texto.titulo;
+        descripcion.textContent = texto.descripcion;
+        disposicion.textContent = texto.disposicion;
+        movimiento.textContent = texto.movimiento;
+        propiedades.textContent = texto.propiedades;
+
+        if (estado === 'gas') {
+            particulas.forEach(p => {
+                p.vx = aleatorio(-85, 85);
+                p.vy = aleatorio(-85, 85);
+            });
+        } else if (estado === 'liquido') {
+            particulas.forEach(p => {
+                p.vx = aleatorio(-35, 35);
+                p.vy = aleatorio(-30, 30);
+            });
+        }
+
+        crearParticulas();
+    }
+
+    function dibujarParticula(p) {
+        const gradiente = ctx.createRadialGradient(
+            p.x - p.radio * 0.35,
+            p.y - p.radio * 0.4,
+            1,
+            p.x,
+            p.y,
+            p.radio * 1.5
+        );
+
+        gradiente.addColorStop(0, '#a9d8ff');
+        gradiente.addColorStop(0.45, '#3985d9');
+        gradiente.addColorStop(1, '#1749a2');
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radio, 0, Math.PI * 2);
+        ctx.fillStyle = gradiente;
+        ctx.fill();
+        ctx.strokeStyle = '#1749a2';
+        ctx.lineWidth = 0.7;
+        ctx.stroke();
+    }
+
+    function actualizar(dt, tiempo) {
+        particulas.forEach(p => {
+            if (estado === 'solido') {
+                p.x = p.baseX + Math.sin(tiempo * 0.004 + p.fase) * 2.2;
+                p.y = p.baseY + Math.cos(tiempo * 0.0045 + p.fase) * 2.2;
+            }
+
+            if (estado === 'liquido') {
+                p.x += p.vx * dt;
+                p.y += p.vy * dt;
+
+                const margen = 16;
+
+                if (p.x < margen || p.x > ancho - margen) {
+                    p.vx *= -1;
+                    p.x = Math.max(margen, Math.min(ancho - margen, p.x));
+                }
+
+                if (p.y < alto * 0.30 || p.y > alto - margen) {
+                    p.vy *= -1;
+                    p.y = Math.max(alto * 0.30, Math.min(alto - margen, p.y));
+                }
+
+                p.vx += aleatorio(-7, 7) * dt;
+                p.vy += aleatorio(-7, 7) * dt;
+
+                p.vx = Math.max(-38, Math.min(38, p.vx));
+                p.vy = Math.max(-30, Math.min(30, p.vy));
+            }
+
+            if (estado === 'gas') {
+                p.x += p.vx * dt;
+                p.y += p.vy * dt;
+
+                if (p.x < p.radio || p.x > ancho - p.radio) {
+                    p.vx *= -1;
+                    p.x = Math.max(p.radio, Math.min(ancho - p.radio, p.x));
+                }
+
+                if (p.y < p.radio || p.y > alto - p.radio) {
+                    p.vy *= -1;
+                    p.y = Math.max(p.radio, Math.min(alto - p.radio, p.y));
+                }
+            }
+        });
+    }
+
+    function dibujar(tiempo) {
+        if (!animacionActiva) return;
+
+        const dt = ultimoTiempo
+            ? Math.min((tiempo - ultimoTiempo) / 1000, 0.04)
+            : 0;
+
+        ultimoTiempo = tiempo;
+
+        ctx.clearRect(0, 0, ancho, alto);
+        actualizar(dt, tiempo);
+
+        particulas.forEach(dibujarParticula);
+
+        requestAnimationFrame(dibujar);
+    }
+
+    botones.forEach(boton => {
+        boton.addEventListener('click', () => {
+            cambiarEstado(boton.dataset.estado);
+        });
+    });
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            animacionActiva = false;
+        } else if (!animacionActiva) {
+            animacionActiva = true;
+            ultimoTiempo = 0;
+            requestAnimationFrame(dibujar);
+        }
+    });
+
+    window.addEventListener('resize', prepararCanvas);
+
+    prepararCanvas();
+    cambiarEstado('solido');
+    requestAnimationFrame(dibujar);
+})();
+</script>
+
+</body>
+</html>
