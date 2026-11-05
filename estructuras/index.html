@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -57,7 +58,7 @@ Visualiza y manipula especies químicas mediante modelos tridimensionales intera
 </p>
 
 <div class="contador">
-<strong>36</strong> estructuras disponibles
+<strong>37</strong> estructuras disponibles
 </div>
 
 </header>
@@ -69,17 +70,26 @@ Visualiza y manipula especies químicas mediante modelos tridimensionales intera
 
 <input
 type="text"
+id="busqueda"
 placeholder="🔍 Buscar una especie química...">
 
 </div>
 
 
+<!-- ================================== -->
+<!-- SECCIÓN 1: MOLÉCULAS -->
+<!-- ================================== -->
+
 <h2 class="titulo-seccion">
-Especies químicas
+Moléculas
 </h2>
 
+<p>
+Explora la geometría y la estructura tridimensional de diferentes moléculas.
+</p>
 
-<div class="tarjetas">
+
+<div class="tarjetas" id="tarjetas-moleculas">
 
 
 <div class="card">
@@ -115,6 +125,8 @@ Especies químicas
 <div class="formula">C₂H₄</div>
 <a class="boton" href="../moleculas/eteno.html">Ver estructura →</a>
 </div>
+
+
 <div class="card">
 <h4>cis-but-2-eno</h4>
 <div class="formula">C₄H₈</div>
@@ -127,6 +139,7 @@ Especies químicas
 <div class="formula">C₄H₈</div>
 <a class="boton" href="../moleculas/trans-but-2-eno.html">Ver estructura →</a>
 </div>
+
 
 <div class="card">
 <h4>Etino</h4>
@@ -148,11 +161,13 @@ Especies químicas
 <a class="boton" href="../moleculas/etanol.html">Ver estructura →</a>
 </div>
 
-  <div class="card">
+
+<div class="card">
 <h4>Dimetil éter</h4>
 <div class="formula">C₂H₆O</div>
 <a class="boton" href="../moleculas/dimetil-eter.html">Ver estructura →</a>
 </div>
+
 
 <div class="card">
 <h4>Agua</h4>
@@ -331,6 +346,42 @@ Especies químicas
 
 </div>
 
+
+<!-- ================================== -->
+<!-- SECCIÓN 2: CRISTALES -->
+<!-- ================================== -->
+
+<h2 class="titulo-seccion">
+Cristales
+</h2>
+
+<p>
+Explora la organización tridimensional de los iones en las redes cristalinas.
+</p>
+
+
+<div class="tarjetas" id="tarjetas-cristales">
+
+
+<div class="card">
+
+<h4>Cloruro de sodio</h4>
+
+<div class="formula">NaCl</div>
+
+<p>
+Estructura tipo sal gema (halita). Red cúbica centrada en las caras.
+</p>
+
+<a class="boton" href="cristales/nacl.html">
+Ver estructura →
+</a>
+
+</div>
+
+
+</div>
+
 </main>
 
 
@@ -341,6 +392,39 @@ Química<span style="color:#2E5EAA;">3D</span> · v3.0 · © 2026 · Juana M.ª 
 
 <script src="../js/script.js"></script>
 
+
+<!-- BUSCADOR DE ESTRUCTURAS -->
+
+<script>
+
+const busqueda = document.getElementById("busqueda");
+
+busqueda.addEventListener("input", function() {
+
+    const termino = this.value
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+    const tarjetas = document.querySelectorAll(".card");
+
+    tarjetas.forEach(tarjeta => {
+
+        const contenido = tarjeta.textContent
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+
+        tarjeta.style.display =
+            contenido.includes(termino) ? "" : "none";
+
+    });
+
+});
+
+</script>
+
 </body>
 
 </html>
+
