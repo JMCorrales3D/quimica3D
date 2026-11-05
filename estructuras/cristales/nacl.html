@@ -3,7 +3,6 @@
 <html lang="es">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,6 +11,10 @@
 <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
 
 <style>
+
+* {
+    box-sizing: border-box;
+}
 
 html, body {
     margin: 0;
@@ -27,128 +30,175 @@ html, body {
     height: 100vh;
 }
 
+/* TÍTULO */
+
 .titulo {
     position: fixed;
-    top: 12px;
+    top: 14px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255,255,255,.93);
-    padding: 9px 18px;
+    background: rgba(255,255,255,0.94);
+    padding: 10px 20px;
     border-radius: 10px;
     font-size: 20px;
     font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    color: #222;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.12);
     z-index: 1000;
     white-space: nowrap;
 }
+
+/* LEYENDA */
 
 .leyenda {
     position: fixed;
     top: 75px;
     left: 15px;
-    background: rgba(255,255,255,.94);
+    background: rgba(255,255,255,0.94);
     padding: 12px 15px;
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,.12);
-    font-size: 13px;
+    box-shadow: 0 2px 7px rgba(0,0,0,0.12);
     z-index: 1000;
+    font-size: 13px;
+    color: #444;
     line-height: 2;
 }
 
-.color {
-    display: inline-block;
+.elemento {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.bola {
     width: 13px;
     height: 13px;
     border-radius: 50%;
-    margin-right: 7px;
-    vertical-align: middle;
+    display: inline-block;
 }
 
-.na { background: #7658C8; }
-.cl { background: #54A6C5; }
+.sodio {
+    background: #7658C8;
+}
+
+.cloro {
+    background: #54A6C5;
+}
+
+.linea {
+    width: 20px;
+    height: 2px;
+    background: #888;
+    display: inline-block;
+}
+
+/* BOTONES */
 
 .controles {
     position: fixed;
-    bottom: 18px;
+    bottom: 55px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1000;
     display: flex;
-    gap: 8px;
+    gap: 10px;
+    z-index: 1000;
 }
 
 button {
     border: none;
     border-radius: 8px;
-    padding: 9px 15px;
-    background: #315F9E;
-    color: white;
-    cursor: pointer;
+    padding: 11px 16px;
+    background: #e9e4f8;
+    color: #514080;
     font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    transition: 0.2s;
 }
 
 button:hover {
-    background: #244879;
+    background: #d8cdf5;
 }
+
+/* FIRMA */
 
 .credito {
     position: fixed;
     bottom: 12px;
     right: 12px;
     padding: 6px 10px;
-    background: rgba(255,255,255,.9);
+    background: rgba(255,255,255,0.88);
     border-radius: 8px;
     text-decoration: none;
     color: #666;
     font-size: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,.15);
     z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.10);
 }
 
 .credito:hover {
-    color: #8a6fd1;
+    color: #7658C8;
 }
 
-@media(max-width:600px) {
+/* MÓVILES */
+
+@media (max-width: 600px) {
 
     .titulo {
         font-size: 17px;
+        padding: 9px 13px;
+    }
+
+    .leyenda {
+        top: 65px;
+        left: 8px;
+        padding: 9px 11px;
+        font-size: 11px;
     }
 
     .controles {
-        bottom: 65px;
+        bottom: 55px;
+        width: 100%;
+        justify-content: center;
+        gap: 7px;
     }
 
     button {
-        padding: 9px 11px;
-        font-size: 12px;
+        padding: 10px 11px;
+        font-size: 11px;
     }
 
     .credito {
         font-size: 10px;
     }
-
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="titulo">
-Cloruro de sodio (NaCl)
+    Cloruro de sodio (NaCl) · Halita
 </div>
 
 <div class="leyenda">
 
-<strong>Leyenda</strong><br>
+    <div class="elemento">
+        <span class="bola sodio"></span>
+        Na⁺ · Ion sodio
+    </div>
 
-<span class="color na"></span> Na⁺ · Sodio<br>
+    <div class="elemento">
+        <span class="bola cloro"></span>
+        Cl⁻ · Ion cloruro
+    </div>
 
-<span class="color cl"></span> Cl⁻ · Cloruro<br>
-
-▢ Celda unidad
+    <div class="elemento">
+        <span class="linea"></span>
+        Celda unidad
+    </div>
 
 </div>
 
@@ -156,90 +206,128 @@ Cloruro de sodio (NaCl)
 
 <div class="controles">
 
-<button id="rotacion">
-⏸ Detener giro
-</button>
+    <button id="giro">
+        Detener giro
+    </button>
 
-<button id="celda">
-Ocultar celda unidad
-</button>
+    <button id="celda">
+        Ocultar celda unidad
+    </button>
 
 </div>
 
 <a class="credito"
-href="https://jmcorrales3d.github.io/quimica3D/"
-target="_blank">
-
-Química3D · Juana Mª Corrales
-
+   href="https://jmcorrales3d.github.io/quimica3D/"
+   target="_blank">
+   Química3D · Juana Mª Corrales
 </a>
-
 
 <script>
 
 // ======================================
-// 1. CREAR VISOR
+// 1. CONFIGURACIÓN DEL VISOR
 // ======================================
 
-const viewer = $3Dmol.createViewer("viewer", {
+const elemento = document.getElementById("viewer");
+
+const viewer = $3Dmol.createViewer(elemento, {
     backgroundColor: "white"
 });
 
+
+// ======================================
+// 2. DATOS DE LA ESTRUCTURA NaCl
+// ======================================
+
+// Parámetro de red en angstroms
+
 const a = 5.64;
 
-
-// ======================================
-// 2. POSICIONES CRISTALOGRÁFICAS
-// ======================================
-
-// Cl-: posiciones de la red CFC
+// Posiciones de los iones Cl-
+// Red cúbica centrada en las caras
 
 const cloro = [
-    [0,0,0],
-    [0,0.5,0.5],
-    [0.5,0,0.5],
-    [0.5,0.5,0]
+    [0, 0, 0],
+    [0, 0.5, 0.5],
+    [0.5, 0, 0.5],
+    [0.5, 0.5, 0]
 ];
 
-// Na+: posiciones octaédricas
+// Posiciones de los iones Na+
+// Ocupan los huecos octaédricos
 
 const sodio = [
-    [0.5,0,0],
-    [0,0.5,0],
-    [0,0,0.5],
-    [0.5,0.5,0.5]
+    [0.5, 0, 0],
+    [0, 0.5, 0],
+    [0, 0, 0.5],
+    [0.5, 0.5, 0.5]
 ];
 
 
 // ======================================
-// 3. CONSTRUIR MODELO DE IONES
+// 3. GENERACIÓN DE LA RED CRISTALINA
 // ======================================
 
-let atomos = [];
+// Se representan tres celdas en cada dirección.
+// Se eliminan las posiciones duplicadas
+// para evitar superponer esferas.
+
+const posiciones = [];
+
+const ocupadas = new Set();
+
+function anadirIon(elemento, x, y, z) {
+
+    const clave =
+        elemento + "_" +
+        x.toFixed(4) + "_" +
+        y.toFixed(4) + "_" +
+        z.toFixed(4);
+
+    if (ocupadas.has(clave)) {
+        return;
+    }
+
+    ocupadas.add(clave);
+
+    posiciones.push({
+        elemento: elemento,
+        x: x,
+        y: y,
+        z: z
+    });
+}
+
+
+// Generar las celdas vecinas
 
 for (let i = -1; i <= 1; i++) {
+
     for (let j = -1; j <= 1; j++) {
+
         for (let k = -1; k <= 1; k++) {
 
-            cloro.forEach(p => {
+            // Iones cloruro
 
-                atomos.push({
-                    elemento: "Cl",
-                    x: (i+p[0])*a,
-                    y: (j+p[1])*a,
-                    z: (k+p[2])*a
-                });
+            cloro.forEach(pos => {
+
+                const x = (i + pos[0]) * a;
+                const y = (j + pos[1]) * a;
+                const z = (k + pos[2]) * a;
+
+                anadirIon("Cl", x, y, z);
 
             });
 
-            sodio.forEach(p => {
+            // Iones sodio
 
-                atomos.push({
-                    elemento: "Na",
-                    x: (i+p[0])*a,
-                    y: (j+p[1])*a,
-                    z: (k+p[2])*a
-                });
+            sodio.forEach(pos => {
+
+                const x = (i + pos[0]) * a;
+                const y = (j + pos[1]) * a;
+                const z = (k + pos[2]) * a;
+
+                anadirIon("Na", x, y, z);
 
             });
 
@@ -248,39 +336,53 @@ for (let i = -1; i <= 1; i++) {
 }
 
 
-// Crear archivo XYZ en memoria
+// ======================================
+// 4. CREAR EL MODELO DE IONES
+// ======================================
 
-let xyz = atomos.length + "\n";
-xyz += "Red cristalina de cloruro de sodio\n";
+// Formato XYZ para 3Dmol.js
 
-atomos.forEach(atomo => {
+let datosXYZ = "";
 
-    xyz += `${atomo.elemento} ${atomo.x} ${atomo.y} ${atomo.z}\n`;
+datosXYZ += posiciones.length + "\n";
+datosXYZ += "Estructura cristalina del NaCl\n";
+
+posiciones.forEach(ion => {
+
+    datosXYZ +=
+        ion.elemento + " " +
+        ion.x + " " +
+        ion.y + " " +
+        ion.z + "\n";
 
 });
 
 
-// Añadir modelo al visor
+// Crear un único modelo independiente
 
-const modeloIones = viewer.addModel(xyz, "xyz");
+const modeloIones = viewer.addModel(datosXYZ, "xyz");
 
-// Estilo de los iones
 
-modeloIones.setStyle(
-    {elem: "Na"},
+// Estilo de los iones sodio
+
+viewer.setStyle(
+    { elem: "Na" },
     {
         sphere: {
-            radius: 0.78,
+            radius: 1.05,
             color: "#7658C8"
         }
     }
 );
 
-modeloIones.setStyle(
-    {elem: "Cl"},
+
+// Estilo de los iones cloruro
+
+viewer.setStyle(
+    { elem: "Cl" },
     {
         sphere: {
-            radius: 1.15,
+            radius: 1.45,
             color: "#54A6C5"
         }
     }
@@ -288,146 +390,168 @@ modeloIones.setStyle(
 
 
 // ======================================
-// 4. CELDA UNIDAD INDEPENDIENTE
+// 5. CREAR LA CELDA UNIDAD
 // ======================================
 
-const esquinas = [
-    [0,0,0],
-    [a,0,0],
-    [a,a,0],
-    [0,a,0],
-    [0,0,a],
-    [a,0,a],
-    [a,a,a],
-    [0,a,a]
+// La celda se crea como una figura independiente.
+// Ocultarla no afecta al modelo de los iones.
+
+const modeloCelda = viewer.addShape({
+    color: "#888888",
+    linewidth: 2
+});
+
+
+// Ocho vértices del cubo
+
+const vertices = [
+    [0, 0, 0],
+    [a, 0, 0],
+    [a, a, 0],
+    [0, a, 0],
+    [0, 0, a],
+    [a, 0, a],
+    [a, a, a],
+    [0, a, a]
 ];
+
+
+// Doce aristas del cubo
 
 const aristas = [
-    [0,1],[1,2],[2,3],[3,0],
-    [4,5],[5,6],[6,7],[7,4],
-    [0,4],[1,5],[2,6],[3,7]
+    [0, 1],
+    [1, 2],
+    [2, 3],
+    [3, 0],
+
+    [4, 5],
+    [5, 6],
+    [6, 7],
+    [7, 4],
+
+    [0, 4],
+    [1, 5],
+    [2, 6],
+    [3, 7]
 ];
 
 
-// Crear modelo independiente para el cubo
+// Dibujar las aristas
 
-function crearCelda() {
+aristas.forEach(arista => {
 
-    let pdb = "";
+    const inicio = vertices[arista[0]];
+    const final = vertices[arista[1]];
 
-    esquinas.forEach((p, i) => {
+    modeloCelda.addLine({
+        start: {
+            x: inicio[0],
+            y: inicio[1],
+            z: inicio[2]
+        },
 
-        const serial = String(i+1).padStart(5," ");
+        end: {
+            x: final[0],
+            y: final[1],
+            z: final[2]
+        },
 
-        const x = (p[0]*10).toFixed(3).padStart(8," ");
-        const y = (p[1]*10).toFixed(3).padStart(8," ");
-        const z = (p[2]*10).toFixed(3).padStart(8," ");
-
-        pdb += `HETATM${serial}  C   CEL A   1    ${x}${y}${z}  1.00  0.00           C\n`;
-
+        color: "#888888"
     });
 
-    aristas.forEach(e => {
-
-        const n1 = String(e[0]+1).padStart(5," ");
-        const n2 = String(e[1]+1).padStart(5," ");
-
-        pdb += `CONECT${n1}${n2}\n`;
-
-    });
-
-    pdb += "END\n";
-
-    const modeloCelda = viewer.addModel(pdb, "pdb");
-
-    modeloCelda.setStyle({}, {
-        line: {
-            color: "#888888",
-            linewidth: 2
-        }
-    });
-
-    return modeloCelda;
-
-}
-
-
-// Guardar referencia del cubo
-
-let modeloCelda = crearCelda();
-
-let mostrarCelda = true;
+});
 
 
 // ======================================
-// 5. AJUSTAR VISOR
+// 6. AJUSTES DEL VISOR
 // ======================================
+
+// Centrar y ajustar la estructura
 
 viewer.zoomTo();
 
 viewer.render();
 
 
-// ======================================
-// 6. ROTACIÓN AUTOMÁTICA
-// ======================================
+// Activar giro automático
 
 let girando = true;
 
-viewer.spin("y", 0.5);
+viewer.spin("y", 0.35);
 
-document.getElementById("rotacion").onclick = function() {
+
+// ======================================
+// 7. BOTÓN DE GIRO
+// ======================================
+
+const botonGiro = document.getElementById("giro");
+
+botonGiro.addEventListener("click", function() {
 
     if (girando) {
 
         viewer.spin(false);
 
-        this.textContent = "▶ Reanudar giro";
+        botonGiro.textContent = "Iniciar giro";
+
+        girando = false;
 
     } else {
 
-        viewer.spin("y", 0.5);
+        viewer.spin("y", 0.35);
 
-        this.textContent = "⏸ Detener giro";
+        botonGiro.textContent = "Detener giro";
+
+        girando = true;
 
     }
 
-    girando = !girando;
-
-};
+});
 
 
 // ======================================
-// 7. MOSTRAR / OCULTAR CELDA
+// 8. BOTÓN DE LA CELDA UNIDAD
 // ======================================
 
-document.getElementById("celda").onclick = function() {
+const botonCelda = document.getElementById("celda");
 
-    if (mostrarCelda) {
+let mostrarCelda = true;
 
-        // Eliminar exclusivamente el modelo del cubo
-
-        viewer.removeModel(modeloCelda);
-
-        modeloCelda = null;
-
-        this.textContent = "Mostrar celda unidad";
-
-    } else {
-
-        // Reconstruir exclusivamente el cubo
-
-        modeloCelda = crearCelda();
-
-        this.textContent = "Ocultar celda unidad";
-
-    }
+botonCelda.addEventListener("click", function() {
 
     mostrarCelda = !mostrarCelda;
 
+    // Solo se oculta o muestra la figura del cubo.
+    // Los iones pertenecen a otro modelo y no se modifican.
+
+    modeloCelda.hidden = !mostrarCelda;
+
+    if (mostrarCelda) {
+
+        botonCelda.textContent = "Ocultar celda unidad";
+
+    } else {
+
+        botonCelda.textContent = "Mostrar celda unidad";
+
+    }
+
     viewer.render();
 
-};
+});
+
+
+// ======================================
+// 9. AJUSTE DEL VISOR AL CAMBIAR TAMAÑO
+// ======================================
+
+window.addEventListener("resize", function() {
+
+    viewer.resize();
+
+    viewer.render();
+
+});
 
 </script>
 
