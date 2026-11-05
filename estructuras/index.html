@@ -1,30 +1,16 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Estructuras químicas | Química3D</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="../css/estilos.css">
 
 <style>
-
-/* =========================================
-   ESTRUCTURAS QUÍMICAS
-   Diseño específico de esta página
-========================================= */
-
-/* Contenedor de las dos columnas */
-
 .distribucion-estructuras {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -32,15 +18,9 @@
     align-items: start;
     width: 100%;
 }
-
-/* Cada sección */
-
 .bloque-estructuras {
     min-width: 0;
 }
-
-/* Títulos de las secciones */
-
 .bloque-estructuras .titulo-seccion {
     font-size: 1.8rem;
     text-align: left;
@@ -48,18 +28,12 @@
     padding-bottom: 15px;
     border-bottom: 2px solid #edf0f5;
 }
-
-/* Rejilla de tarjetas */
-
 .rejilla-estructuras {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
     width: 100%;
 }
-
-/* Tarjetas */
-
 .rejilla-estructuras .card {
     min-width: 0;
     padding: 24px 15px;
@@ -68,164 +42,93 @@
     align-items: center;
     justify-content: space-between;
 }
-
-/* Nombre de las estructuras */
-
 .rejilla-estructuras .card h4 {
     font-size: 1.1rem;
     line-height: 1.4;
 }
-
-/* Fórmula química */
-
 .rejilla-estructuras .formula {
     margin-bottom: 12px;
 }
-
-/* Botones */
-
 .rejilla-estructuras .boton {
     font-size: 0.9rem;
 }
-
-/* Descripciones */
-
 .descripcion-estructuras {
     color: #666;
     font-size: 0.92rem;
     margin: -12px 0 25px;
     line-height: 1.6;
 }
-
-/* Mensajes del buscador */
-
 .mensaje-sin-resultados {
     display: none;
     color: #777;
     font-size: 0.9rem;
     margin-top: 20px;
 }
-
-/* =========================================
-   TABLET
-========================================= */
-
 @media (max-width: 850px) {
-
     .distribucion-estructuras {
         grid-template-columns: 1fr;
         gap: 55px;
     }
-
 }
-
-/* =========================================
-   MÓVIL
-========================================= */
-
 @media (max-width: 480px) {
-
     .rejilla-estructuras {
         grid-template-columns: 1fr;
     }
-
     .bloque-estructuras .titulo-seccion {
         font-size: 1.6rem;
     }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-<!-- NAVEGACIÓN -->
-
 <nav>
-
 <div class="contenedor">
-
 <div class="logo">
 <a href="../index.html">Química<span>3D</span></a>
 </div>
-
 <div class="menu">
-
 <a href="../index.html">Inicio</a>
-
 <a href="index.html" class="activo">Estructuras químicas</a>
-
 <a href="../quimica/index.html">Química</a>
-
 <a href="../experimenta/index.html">Experimenta</a>
-
 <a href="../sobre/index.html">Sobre</a>
-
 </div>
-
 </div>
-
 </nav>
 
-
-<!-- CABECERA -->
-
 <header>
-
 <h1>Estructuras químicas</h1>
-
 <h2>Explora la Química en tres dimensiones</h2>
-
-<p>
-Visualiza y manipula especies químicas mediante modelos tridimensionales interactivos.
-</p>
-
+<p>Visualiza y manipula especies químicas mediante modelos tridimensionales interactivos.</p>
 <div class="contador">
-<strong>37</strong> estructuras disponibles
+<strong>38</strong> estructuras disponibles
 </div>
-
 </header>
-
-
-<!-- CONTENIDO -->
 
 <main>
 
-<!-- BUSCADOR -->
-
 <div class="buscador">
-
 <input
 type="text"
 id="busqueda"
 placeholder="🔍 Buscar una especie química..."
 autocomplete="off">
-
 </div>
-
-
-<!-- DOS COLUMNAS -->
 
 <div class="distribucion-estructuras">
 
-
-<!-- =====================================
-     COLUMNA IZQUIERDA: MOLÉCULAS
-===================================== -->
+<!-- COLUMNA IZQUIERDA: MOLÉCULAS -->
 
 <section class="bloque-estructuras">
 
 <h2 class="titulo-seccion">Moléculas</h2>
-
 <p class="descripcion-estructuras">
 Explora la geometría y la estructura tridimensional de diferentes moléculas.
 </p>
 
 <div class="rejilla-estructuras" id="moleculas">
-
 
 <div class="card">
 <h4>Metano</h4>
@@ -443,7 +346,6 @@ Explora la geometría y la estructura tridimensional de diferentes moléculas.
 <a class="boton" href="../moleculas/cocaina.html">Ver estructura →</a>
 </div>
 
-
 </div>
 
 <p class="mensaje-sin-resultados" id="sin-moleculas">
@@ -452,31 +354,34 @@ No se han encontrado moléculas.
 
 </section>
 
-
-<!-- =====================================
-     COLUMNA DERECHA: CRISTALES
-===================================== -->
+<!-- COLUMNA DERECHA: CRISTALES -->
 
 <section class="bloque-estructuras">
 
 <h2 class="titulo-seccion">Cristales</h2>
-
 <p class="descripcion-estructuras">
-Explora la organización tridimensional de los iones en las redes cristalinas.
+Explora la organización tridimensional de los átomos e iones en las redes cristalinas.
 </p>
 
 <div class="rejilla-estructuras" id="cristales">
-
 
 <div class="card">
 <h4>Cloruro de sodio</h4>
 <div class="formula">NaCl</div>
 <p style="font-size:0.85rem; color:#666; margin-bottom:12px;">
-
+Estructura iónica tipo sal gema.
 </p>
 <a class="boton" href="cristales/nacl.html">Ver estructura →</a>
 </div>
 
+<div class="card">
+<h4>Diamante</h4>
+<div class="formula">C</div>
+<p style="font-size:0.85rem; color:#666; margin-bottom:12px;">
+Red covalente tridimensional. Estructura cúbica tipo diamante.
+</p>
+<a class="boton" href="cristales/diamante.html">Ver estructura →</a>
+</div>
 
 </div>
 
@@ -486,23 +391,14 @@ No se han encontrado cristales.
 
 </section>
 
-
 </div>
-
 </main>
-
-
-<!-- FOOTER -->
 
 <footer>
 Química<span style="color:#2E5EAA;">3D</span> · v3.0 · © 2026 · Juana M.ª Corrales
 </footer>
 
-
-<!-- BUSCADOR -->
-
 <script>
-
 const buscador = document.getElementById("busqueda");
 
 const grupos = [
@@ -517,44 +413,34 @@ const grupos = [
 ];
 
 buscador.addEventListener("input", function () {
-
     const termino = this.value
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 
     grupos.forEach(grupo => {
-
         const contenedor = document.getElementById(grupo.id);
-
         const tarjetas = contenedor.querySelectorAll(".card");
-
         let visibles = 0;
 
         tarjetas.forEach(tarjeta => {
-
             const texto = tarjeta.textContent
                 .toLowerCase()
                 .normalize("NFD")
                 .replace(/[\u0300-\u036f]/g, "");
 
             const coincide = texto.includes(termino);
-
             tarjeta.style.display = coincide ? "flex" : "none";
 
             if (coincide) {
                 visibles++;
             }
-
         });
 
         grupo.mensaje.style.display =
             visibles === 0 ? "block" : "none";
-
     });
-
 });
-
 </script>
 
 </body>
