@@ -1,1 +1,285 @@
 
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cloruro de sodio | Química3D</title>
+
+<script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+
+<style>
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#viewer {
+    width: 100%;
+    height: 100vh;
+}
+
+.titulo {
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,.92);
+    padding: 9px 18px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    z-index: 1000;
+    white-space: nowrap;
+}
+
+.leyenda {
+    position: fixed;
+    top: 75px;
+    left: 15px;
+    background: rgba(255,255,255,.94);
+    padding: 12px 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.12);
+    font-size: 13px;
+    z-index: 1000;
+    line-height: 2;
+}
+
+.color {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    margin-right: 7px;
+    vertical-align: middle;
+}
+
+.na { background: #7658C8; }
+.cl { background: #54A6C5; }
+
+.controles {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 9px 15px;
+    background: #315F9E;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+button:hover {
+    background: #244879;
+}
+
+.credito {
+    position: fixed;
+    bottom: 12px;
+    right: 12px;
+    padding: 6px 10px;
+    background: rgba(255,255,255,.9);
+    border-radius: 8px;
+    text-decoration: none;
+    color: #666;
+    font-size: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.15);
+    z-index: 1000;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="titulo">
+Cloruro de sodio (NaCl)
+</div>
+
+<div class="leyenda">
+
+<strong>Leyenda</strong><br>
+
+<span class="color na"></span> Na⁺ · Sodio<br>
+
+<span class="color cl"></span> Cl⁻ · Cloruro<br>
+
+▢ Celda unidad
+
+</div>
+
+<div id="viewer"></div>
+
+<div class="controles">
+<button id="rotacion">⏸ Detener giro</button>
+<button id="celda">Ocultar celda unidad</button>
+</div>
+
+<a class="credito"
+href="https://jmcorrales3d.github.io/quimica3D/"
+target="_blank">
+
+Química3D · Juana Mª Corrales
+
+</a>
+
+<script>
+
+const viewer = $3Dmol.createViewer("viewer", {
+    backgroundColor: "white"
+});
+
+// Parámetro de red aproximado del NaCl (Å)
+const a = 5.64;
+
+// Posiciones de la estructura tipo sal gema
+// Aniones Cl-: red CFC
+const cloro = [
+    [0,0,0],
+    [0,0.5,0.5],
+    [0.5,0,0.5],
+    [0.5,0.5,0]
+];
+
+// Cationes Na+: posiciones octaédricas
+const sodio = [
+    [0.5,0,0],
+    [0,0.5,0],
+    [0,0,0.5],
+    [0.5,0.5,0.5]
+];
+
+// Crear varias celdas para visualizar
+// la continuidad de la red cristalina
+
+for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+        for (let k = -1; k <= 1; k++) {
+
+            cloro.forEach(p => {
+
+                viewer.addSphere({
+                    center: {
+                        x: (i+p[0])*a,
+                        y: (j+p[1])*a,
+                        z: (k+p[2])*a
+                    },
+                    radius: 1.15,
+                    color: "#54A6C5"
+                });
+
+            });
+
+            sodio.forEach(p => {
+
+                viewer.addSphere({
+                    center: {
+                        x: (i+p[0])*a,
+                        y: (j+p[1])*a,
+                        z: (k+p[2])*a
+                    },
+                    radius: 0.78,
+                    color: "#7658C8"
+                });
+
+            });
+
+        }
+    }
+}
+
+// Dibujar la celda unidad central
+
+let mostrarCelda = true;
+
+const esquinas = [
+    [0,0,0], [a,0,0],
+    [a,a,0], [0,a,0],
+    [0,0,a], [a,0,a],
+    [a,a,a], [0,a,a]
+];
+
+const aristas = [
+    [0,1],[1,2],[2,3],[3,0],
+    [4,5],[5,6],[6,7],[7,4],
+    [0,4],[1,5],[2,6],[3,7]
+];
+
+function dibujarCelda() {
+
+    aristas.forEach(e => {
+
+        const p1 = esquinas[e[0]];
+        const p2 = esquinas[e[1]];
+
+        viewer.addLine({
+            start: {x:p1[0], y:p1[1], z:p1[2]},
+            end: {x:p2[0], y:p2[1], z:p2[2]},
+            color: "#888888",
+            linewidth: 2
+        });
+
+    });
+
+}
+
+dibujarCelda();
+
+viewer.zoomTo();
+viewer.render();
+
+// Giro automático
+let girando = true;
+
+viewer.spin("y", 0.5);
+
+// Botón para detener y reanudar
+document.getElementById("rotacion").onclick = function() {
+
+    if (girando) {
+        viewer.spin(false);
+        this.textContent = "▶ Reanudar giro";
+    } else {
+        viewer.spin("y", 0.5);
+        this.textContent = "⏸ Detener giro";
+    }
+
+    girando = !girando;
+};
+
+// Mostrar u ocultar celda unidad
+document.getElementById("celda").onclick = function() {
+
+    if (mostrarCelda) {
+        viewer.removeAllShapes();
+        this.textContent = "Mostrar celda unidad";
+    } else {
+        dibujarCelda();
+        this.textContent = "Ocultar celda unidad";
+    }
+
+    mostrarCelda = !mostrarCelda;
+    viewer.render();
+
+};
+
+</script>
+
+</body>
+</html>
+
