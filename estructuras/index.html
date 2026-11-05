@@ -18,78 +18,119 @@
 
 <style>
 
-/* =====================================
-   DISTRIBUCIÓN EN DOS COLUMNAS
-===================================== */
+/* =========================================
+   ESTRUCTURAS QUÍMICAS
+   Diseño específico de esta página
+========================================= */
 
-.columnas-estructuras {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+/* Contenedor de las dos columnas */
+
+.distribucion-estructuras {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 35px;
     align-items: start;
-    margin-top: 30px;
+    width: 100%;
 }
 
-.columna-estructuras {
+/* Cada sección */
+
+.bloque-estructuras {
     min-width: 0;
 }
 
-.columna-estructuras .titulo-seccion {
-    margin-bottom: 22px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid #e9eaf0;
+/* Títulos de las secciones */
+
+.bloque-estructuras .titulo-seccion {
+    font-size: 1.8rem;
+    text-align: left;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #edf0f5;
 }
 
-.columna-estructuras .tarjetas {
-    display: grid;
+/* Rejilla de tarjetas */
+
+.rejilla-estructuras {
+    display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
+    gap: 20px;
+    width: 100%;
 }
 
-/* MISMO TAMAÑO PARA TODAS LAS TARJETAS */
+/* Tarjetas */
 
-.columna-estructuras .card {
+.rejilla-estructuras .card {
     min-width: 0;
-    height: 145px;
+    padding: 24px 15px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: space-between;
 }
 
-/* BUSCADOR */
+/* Nombre de las estructuras */
 
-.buscador {
-    margin-bottom: 25px;
+.rejilla-estructuras .card h4 {
+    font-size: 1.1rem;
+    line-height: 1.4;
 }
 
-/* MENSAJE SIN RESULTADOS */
+/* Fórmula química */
 
-.sin-resultados {
+.rejilla-estructuras .formula {
+    margin-bottom: 12px;
+}
+
+/* Botones */
+
+.rejilla-estructuras .boton {
+    font-size: 0.9rem;
+}
+
+/* Descripciones */
+
+.descripcion-estructuras {
+    color: #666;
+    font-size: 0.92rem;
+    margin: -12px 0 25px;
+    line-height: 1.6;
+}
+
+/* Mensajes del buscador */
+
+.mensaje-sin-resultados {
     display: none;
     color: #777;
-    font-size: 14px;
-    padding: 15px 0;
+    font-size: 0.9rem;
+    margin-top: 20px;
 }
 
-/* ADAPTACIÓN A TABLET Y MÓVIL */
+/* =========================================
+   TABLET
+========================================= */
 
 @media (max-width: 850px) {
 
-    .columnas-estructuras {
+    .distribucion-estructuras {
         grid-template-columns: 1fr;
-        gap: 45px;
-    }
-
-    .columna-estructuras .tarjetas {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 55px;
     }
 
 }
 
+/* =========================================
+   MÓVIL
+========================================= */
+
 @media (max-width: 480px) {
 
-    .columna-estructuras .tarjetas {
+    .rejilla-estructuras {
         grid-template-columns: 1fr;
+    }
+
+    .bloque-estructuras .titulo-seccion {
+        font-size: 1.6rem;
     }
 
 }
@@ -98,7 +139,10 @@
 
 </head>
 
+
 <body>
+
+<!-- NAVEGACIÓN -->
 
 <nav>
 
@@ -127,6 +171,8 @@
 </nav>
 
 
+<!-- CABECERA -->
+
 <header>
 
 <h1>Estructuras químicas</h1>
@@ -144,6 +190,8 @@ Visualiza y manipula especies químicas mediante modelos tridimensionales intera
 </header>
 
 
+<!-- CONTENIDO -->
+
 <main>
 
 <!-- BUSCADOR -->
@@ -153,29 +201,30 @@ Visualiza y manipula especies químicas mediante modelos tridimensionales intera
 <input
 type="text"
 id="busqueda"
-placeholder="🔍 Buscar una especie química...">
+placeholder="🔍 Buscar una especie química..."
+autocomplete="off">
 
 </div>
 
 
-<!-- =====================================
-     DOS COLUMNAS
-===================================== -->
+<!-- DOS COLUMNAS -->
 
-<div class="columnas-estructuras">
+<div class="distribucion-estructuras">
 
 
 <!-- =====================================
      COLUMNA IZQUIERDA: MOLÉCULAS
 ===================================== -->
 
-<section class="columna-estructuras">
+<section class="bloque-estructuras">
 
-<h2 class="titulo-seccion">
-Moléculas
-</h2>
+<h2 class="titulo-seccion">Moléculas</h2>
 
-<div class="tarjetas" id="tarjetas-moleculas">
+<p class="descripcion-estructuras">
+Explora la geometría y la estructura tridimensional de diferentes moléculas.
+</p>
+
+<div class="rejilla-estructuras" id="moleculas">
 
 
 <div class="card">
@@ -184,13 +233,11 @@ Moléculas
 <a class="boton" href="../moleculas/metano.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Etano</h4>
 <div class="formula">C₂H₆</div>
 <a class="boton" href="../moleculas/etano.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Propano</h4>
@@ -198,13 +245,11 @@ Moléculas
 <a class="boton" href="../moleculas/propano.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Butano</h4>
 <div class="formula">C₄H₁₀</div>
 <a class="boton" href="../moleculas/butano.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Eteno</h4>
@@ -212,13 +257,11 @@ Moléculas
 <a class="boton" href="../moleculas/eteno.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>cis-but-2-eno</h4>
 <div class="formula">C₄H₈</div>
 <a class="boton" href="../moleculas/cis-but-2-eno.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>trans-but-2-eno</h4>
@@ -226,13 +269,11 @@ Moléculas
 <a class="boton" href="../moleculas/trans-but-2-eno.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Etino</h4>
 <div class="formula">C₂H₂</div>
 <a class="boton" href="../moleculas/etino.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Benceno</h4>
@@ -240,13 +281,11 @@ Moléculas
 <a class="boton" href="../moleculas/benceno.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Etanol</h4>
 <div class="formula">C₂H₆O</div>
 <a class="boton" href="../moleculas/etanol.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Dimetil éter</h4>
@@ -254,13 +293,11 @@ Moléculas
 <a class="boton" href="../moleculas/dimetil-eter.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Agua</h4>
 <div class="formula">H₂O</div>
 <a class="boton" href="../moleculas/agua.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Amoniaco</h4>
@@ -268,13 +305,11 @@ Moléculas
 <a class="boton" href="../moleculas/amoniaco.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Dióxido de carbono</h4>
 <div class="formula">CO₂</div>
 <a class="boton" href="../moleculas/dioxidodecarbono.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Ozono</h4>
@@ -282,13 +317,11 @@ Moléculas
 <a class="boton" href="../moleculas/ozono.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Cloruro de hidrógeno</h4>
 <div class="formula">HCl</div>
 <a class="boton" href="../moleculas/clorurodehidrogeno.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Glucosa</h4>
@@ -296,13 +329,11 @@ Moléculas
 <a class="boton" href="../moleculas/glucosa.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Fructosa</h4>
 <div class="formula">C₆H₁₂O₆</div>
 <a class="boton" href="../moleculas/fructosa.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Sacarosa</h4>
@@ -310,13 +341,11 @@ Moléculas
 <a class="boton" href="../moleculas/sacarosa.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Vitamina C</h4>
 <div class="formula">C₆H₈O₆</div>
 <a class="boton" href="../moleculas/vitaminac.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>ATP</h4>
@@ -324,13 +353,11 @@ Moléculas
 <a class="boton" href="../moleculas/atp.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Colesterol</h4>
 <div class="formula">C₂₇H₄₆O</div>
 <a class="boton" href="../moleculas/colesterol.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Clorofila</h4>
@@ -338,13 +365,11 @@ Moléculas
 <a class="boton" href="../moleculas/clorofila.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Aspirina</h4>
 <div class="formula">C₉H₈O₄</div>
 <a class="boton" href="../moleculas/aspirina.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Paracetamol</h4>
@@ -352,13 +377,11 @@ Moléculas
 <a class="boton" href="../moleculas/paracetamol.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Ibuprofeno</h4>
 <div class="formula">C₁₃H₁₈O₂</div>
 <a class="boton" href="../moleculas/ibuprofeno.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Morfina</h4>
@@ -366,13 +389,11 @@ Moléculas
 <a class="boton" href="../moleculas/morfina.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Cafeína</h4>
 <div class="formula">C₈H₁₀N₄O₂</div>
 <a class="boton" href="../moleculas/cafeina.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Teobromina</h4>
@@ -380,13 +401,11 @@ Moléculas
 <a class="boton" href="../moleculas/teobromina.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Vainillina</h4>
 <div class="formula">C₈H₈O₃</div>
 <a class="boton" href="../moleculas/vainillina.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Serotonina</h4>
@@ -394,13 +413,11 @@ Moléculas
 <a class="boton" href="../moleculas/serotonina.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Melatonina</h4>
 <div class="formula">C₁₃H₁₆N₂O₂</div>
 <a class="boton" href="../moleculas/melatonina.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Adrenalina</h4>
@@ -408,20 +425,17 @@ Moléculas
 <a class="boton" href="../moleculas/adrenalina.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>Nicotina</h4>
 <div class="formula">C₁₀H₁₄N₂</div>
 <a class="boton" href="../moleculas/nicotina.html">Ver estructura →</a>
 </div>
 
-
 <div class="card">
 <h4>THC</h4>
 <div class="formula">C₂₁H₃₀O₂</div>
 <a class="boton" href="../moleculas/thc.html">Ver estructura →</a>
 </div>
-
 
 <div class="card">
 <h4>Cocaína</h4>
@@ -432,7 +446,7 @@ Moléculas
 
 </div>
 
-<p class="sin-resultados" id="sin-moleculas">
+<p class="mensaje-sin-resultados" id="sin-moleculas">
 No se han encontrado moléculas.
 </p>
 
@@ -443,85 +457,90 @@ No se han encontrado moléculas.
      COLUMNA DERECHA: CRISTALES
 ===================================== -->
 
-<section class="columna-estructuras">
+<section class="bloque-estructuras">
 
-<h2 class="titulo-seccion">
-Cristales
-</h2>
+<h2 class="titulo-seccion">Cristales</h2>
 
-<div class="tarjetas" id="tarjetas-cristales">
+<p class="descripcion-estructuras">
+Explora la organización tridimensional de los iones en las redes cristalinas.
+</p>
+
+<div class="rejilla-estructuras" id="cristales">
 
 
 <div class="card">
 <h4>Cloruro de sodio</h4>
 <div class="formula">NaCl</div>
+<p style="font-size:0.85rem; color:#666; margin-bottom:12px;">
+Estructura tipo sal gema (halita). Red cúbica centrada en las caras.
+</p>
 <a class="boton" href="cristales/nacl.html">Ver estructura →</a>
 </div>
 
 
 </div>
 
-<p class="sin-resultados" id="sin-cristales">
+<p class="mensaje-sin-resultados" id="sin-cristales">
 No se han encontrado cristales.
 </p>
 
 </section>
+
 
 </div>
 
 </main>
 
 
+<!-- FOOTER -->
+
 <footer>
 Química<span style="color:#2E5EAA;">3D</span> · v3.0 · © 2026 · Juana M.ª Corrales
 </footer>
 
 
-<script src="../js/script.js"></script>
-
-
-<!-- =====================================
-     BUSCADOR GENERAL
-===================================== -->
+<!-- BUSCADOR -->
 
 <script>
 
-const busqueda = document.getElementById("busqueda");
+const buscador = document.getElementById("busqueda");
 
-const tarjetasMoleculas = document.querySelectorAll(
-    "#tarjetas-moleculas .card"
-);
+const grupos = [
+    {
+        id: "moleculas",
+        mensaje: document.getElementById("sin-moleculas")
+    },
+    {
+        id: "cristales",
+        mensaje: document.getElementById("sin-cristales")
+    }
+];
 
-const tarjetasCristales = document.querySelectorAll(
-    "#tarjetas-cristales .card"
-);
-
-const sinMoleculas = document.getElementById("sin-moleculas");
-
-const sinCristales = document.getElementById("sin-cristales");
-
-
-busqueda.addEventListener("input", function() {
+buscador.addEventListener("input", function () {
 
     const termino = this.value
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 
-    function filtrar(tarjetas, mensaje) {
+    grupos.forEach(grupo => {
+
+        const contenedor = document.getElementById(grupo.id);
+
+        const tarjetas = contenedor.querySelectorAll(".card");
 
         let visibles = 0;
 
         tarjetas.forEach(tarjeta => {
 
-            const contenido = tarjeta.textContent
+            const texto = tarjeta.textContent
                 .toLowerCase()
                 .normalize("NFD")
                 .replace(/[\u0300-\u036f]/g, "");
 
-            const coincide = contenido.includes(termino);
+            const coincide = texto.includes(termino);
 
-            tarjeta.style.display = coincide ? "" : "none";
+            tarjeta.style.display = coincide ? "flex" : "none";
 
             if (coincide) {
                 visibles++;
@@ -529,20 +548,14 @@ busqueda.addEventListener("input", function() {
 
         });
 
-        mensaje.style.display =
+        grupo.mensaje.style.display =
             visibles === 0 ? "block" : "none";
 
-    }
-
-    filtrar(tarjetasMoleculas, sinMoleculas);
-
-    filtrar(tarjetasCristales, sinCristales);
+    });
 
 });
 
 </script>
 
 </body>
-
 </html>
-
