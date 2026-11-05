@@ -16,6 +16,86 @@
 
 <link rel="stylesheet" href="../css/estilos.css">
 
+<style>
+
+/* =====================================
+   DISTRIBUCIÓN EN DOS COLUMNAS
+===================================== */
+
+.columnas-estructuras {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    align-items: start;
+    margin-top: 30px;
+}
+
+.columna-estructuras {
+    min-width: 0;
+}
+
+.columna-estructuras .titulo-seccion {
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e9eaf0;
+}
+
+.columna-estructuras .tarjetas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* MISMO TAMAÑO PARA TODAS LAS TARJETAS */
+
+.columna-estructuras .card {
+    min-width: 0;
+    height: 145px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* BUSCADOR */
+
+.buscador {
+    margin-bottom: 25px;
+}
+
+/* MENSAJE SIN RESULTADOS */
+
+.sin-resultados {
+    display: none;
+    color: #777;
+    font-size: 14px;
+    padding: 15px 0;
+}
+
+/* ADAPTACIÓN A TABLET Y MÓVIL */
+
+@media (max-width: 850px) {
+
+    .columnas-estructuras {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .columna-estructuras .tarjetas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .columna-estructuras .tarjetas {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
 </head>
 
 <body>
@@ -66,6 +146,8 @@ Visualiza y manipula especies químicas mediante modelos tridimensionales intera
 
 <main>
 
+<!-- BUSCADOR -->
+
 <div class="buscador">
 
 <input
@@ -76,18 +158,22 @@ placeholder="🔍 Buscar una especie química...">
 </div>
 
 
-<!-- ================================== -->
-<!-- SECCIÓN 1: MOLÉCULAS -->
-<!-- ================================== -->
+<!-- =====================================
+     DOS COLUMNAS
+===================================== -->
+
+<div class="columnas-estructuras">
+
+
+<!-- =====================================
+     COLUMNA IZQUIERDA: MOLÉCULAS
+===================================== -->
+
+<section class="columna-estructuras">
 
 <h2 class="titulo-seccion">
 Moléculas
 </h2>
-
-<p>
-Explora la geometría y la estructura tridimensional de diferentes moléculas.
-</p>
-
 
 <div class="tarjetas" id="tarjetas-moleculas">
 
@@ -346,39 +432,40 @@ Explora la geometría y la estructura tridimensional de diferentes moléculas.
 
 </div>
 
+<p class="sin-resultados" id="sin-moleculas">
+No se han encontrado moléculas.
+</p>
 
-<!-- ================================== -->
-<!-- SECCIÓN 2: CRISTALES -->
-<!-- ================================== -->
+</section>
+
+
+<!-- =====================================
+     COLUMNA DERECHA: CRISTALES
+===================================== -->
+
+<section class="columna-estructuras">
 
 <h2 class="titulo-seccion">
 Cristales
 </h2>
 
-<p>
-Explora la organización tridimensional de los iones en las redes cristalinas.
-</p>
-
-
 <div class="tarjetas" id="tarjetas-cristales">
 
 
 <div class="card">
-
 <h4>Cloruro de sodio</h4>
-
 <div class="formula">NaCl</div>
+<a class="boton" href="cristales/nacl.html">Ver estructura →</a>
+</div>
 
-<p>
-Estructura tipo sal gema (halita). Red cúbica centrada en las caras.
-</p>
-
-<a class="boton" href="cristales/nacl.html">
-Ver estructura →
-</a>
 
 </div>
 
+<p class="sin-resultados" id="sin-cristales">
+No se han encontrado cristales.
+</p>
+
+</section>
 
 </div>
 
@@ -393,11 +480,26 @@ Química<span style="color:#2E5EAA;">3D</span> · v3.0 · © 2026 · Juana M.ª 
 <script src="../js/script.js"></script>
 
 
-<!-- BUSCADOR DE ESTRUCTURAS -->
+<!-- =====================================
+     BUSCADOR GENERAL
+===================================== -->
 
 <script>
 
 const busqueda = document.getElementById("busqueda");
+
+const tarjetasMoleculas = document.querySelectorAll(
+    "#tarjetas-moleculas .card"
+);
+
+const tarjetasCristales = document.querySelectorAll(
+    "#tarjetas-cristales .card"
+);
+
+const sinMoleculas = document.getElementById("sin-moleculas");
+
+const sinCristales = document.getElementById("sin-cristales");
+
 
 busqueda.addEventListener("input", function() {
 
@@ -406,19 +508,35 @@ busqueda.addEventListener("input", function() {
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "");
 
-    const tarjetas = document.querySelectorAll(".card");
+    function filtrar(tarjetas, mensaje) {
 
-    tarjetas.forEach(tarjeta => {
+        let visibles = 0;
 
-        const contenido = tarjeta.textContent
-            .toLowerCase()
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "");
+        tarjetas.forEach(tarjeta => {
 
-        tarjeta.style.display =
-            contenido.includes(termino) ? "" : "none";
+            const contenido = tarjeta.textContent
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "");
 
-    });
+            const coincide = contenido.includes(termino);
+
+            tarjeta.style.display = coincide ? "" : "none";
+
+            if (coincide) {
+                visibles++;
+            }
+
+        });
+
+        mensaje.style.display =
+            visibles === 0 ? "block" : "none";
+
+    }
+
+    filtrar(tarjetasMoleculas, sinMoleculas);
+
+    filtrar(tarjetasCristales, sinCristales);
 
 });
 
