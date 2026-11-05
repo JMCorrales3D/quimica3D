@@ -87,9 +87,10 @@ html, body {
 
 .linea {
     width: 20px;
-    height: 2px;
-    background: #888;
+    height: 5px;
+    background: #D62828;
     display: inline-block;
+    border-radius: 3px;
 }
 
 /* BOTONES */
@@ -228,23 +229,21 @@ button:hover {
 // 1. CONFIGURACIÓN DEL VISOR
 // ======================================
 
-const elemento = document.getElementById("viewer");
-
-const viewer = $3Dmol.createViewer(elemento, {
-    backgroundColor: "white"
-});
+const viewer = $3Dmol.createViewer(
+    document.getElementById("viewer"),
+    {
+        backgroundColor: "white"
+    }
+);
 
 
 // ======================================
 // 2. DATOS DE LA ESTRUCTURA NaCl
 // ======================================
 
-// Parámetro de red en angstroms
-
 const a = 5.64;
 
-// Posiciones de los iones Cl-
-// Red cúbica centrada en las caras
+// Posiciones de los iones cloruro
 
 const cloro = [
     [0, 0, 0],
@@ -253,8 +252,7 @@ const cloro = [
     [0.5, 0.5, 0]
 ];
 
-// Posiciones de los iones Na+
-// Ocupan los huecos octaédricos
+// Posiciones de los iones sodio
 
 const sodio = [
     [0.5, 0, 0],
@@ -265,15 +263,10 @@ const sodio = [
 
 
 // ======================================
-// 3. GENERACIÓN DE LA RED CRISTALINA
+// 3. GENERAR LA RED CRISTALINA
 // ======================================
 
-// Se representan tres celdas en cada dirección.
-// Se eliminan las posiciones duplicadas
-// para evitar superponer esferas.
-
 const posiciones = [];
-
 const ocupadas = new Set();
 
 function anadirIon(elemento, x, y, z) {
@@ -299,7 +292,8 @@ function anadirIon(elemento, x, y, z) {
 }
 
 
-// Generar las celdas vecinas
+// Generar tres celdas en cada dirección.
+// La celda unidad central queda centrada en el origen.
 
 for (let i = -1; i <= 1; i++) {
 
@@ -307,25 +301,21 @@ for (let i = -1; i <= 1; i++) {
 
         for (let k = -1; k <= 1; k++) {
 
-            // Iones cloruro
-
             cloro.forEach(pos => {
 
-                const x = (i + pos[0]) * a;
-                const y = (j + pos[1]) * a;
-                const z = (k + pos[2]) * a;
+                const x = (i + pos[0]) * a - a / 2;
+                const y = (j + pos[1]) * a - a / 2;
+                const z = (k + pos[2]) * a - a / 2;
 
                 anadirIon("Cl", x, y, z);
 
             });
 
-            // Iones sodio
-
             sodio.forEach(pos => {
 
-                const x = (i + pos[0]) * a;
-                const y = (j + pos[1]) * a;
-                const z = (k + pos[2]) * a;
+                const x = (i + pos[0]) * a - a / 2;
+                const y = (j + pos[1]) * a - a / 2;
+                const z = (k + pos[2]) * a - a / 2;
 
                 anadirIon("Na", x, y, z);
 
@@ -339,8 +329,6 @@ for (let i = -1; i <= 1; i++) {
 // ======================================
 // 4. CREAR EL MODELO DE IONES
 // ======================================
-
-// Formato XYZ para 3Dmol.js
 
 let datosXYZ = "";
 
@@ -357,13 +345,10 @@ posiciones.forEach(ion => {
 
 });
 
-
-// Crear un único modelo independiente
-
 const modeloIones = viewer.addModel(datosXYZ, "xyz");
 
 
-// Estilo de los iones sodio
+// Iones sodio
 
 viewer.setStyle(
     { elem: "Na" },
@@ -376,7 +361,7 @@ viewer.setStyle(
 );
 
 
-// Estilo de los iones cloruro
+// Iones cloruro
 
 viewer.setStyle(
     { elem: "Cl" },
@@ -390,33 +375,35 @@ viewer.setStyle(
 
 
 // ======================================
-// 5. CREAR LA CELDA UNIDAD
+// 5. CREAR LA CELDA UNIDAD ROJA
 // ======================================
 
-// La celda se crea como una figura independiente.
-// Ocultarla no afecta al modelo de los iones.
+// La celda se construye con cilindros gruesos.
+// Es un objeto independiente de los iones.
 
 const modeloCelda = viewer.addShape({
-    color: "#888888",
-    linewidth: 2
+    color: "#D62828"
 });
 
 
-// Ocho vértices del cubo
+// Vértices del cubo centrado en el origen
+
+const h = a / 2;
 
 const vertices = [
-    [0, 0, 0],
-    [a, 0, 0],
-    [a, a, 0],
-    [0, a, 0],
-    [0, 0, a],
-    [a, 0, a],
-    [a, a, a],
-    [0, a, a]
+    [-h, -h, -h],
+    [ h, -h, -h],
+    [ h,  h, -h],
+    [-h,  h, -h],
+
+    [-h, -h,  h],
+    [ h, -h,  h],
+    [ h,  h,  h],
+    [-h,  h,  h]
 ];
 
 
-// Doce aristas del cubo
+// Doce aristas
 
 const aristas = [
     [0, 1],
@@ -436,14 +423,15 @@ const aristas = [
 ];
 
 
-// Dibujar las aristas
+// Dibujar las aristas como cilindros
 
 aristas.forEach(arista => {
 
     const inicio = vertices[arista[0]];
     const final = vertices[arista[1]];
 
-    modeloCelda.addLine({
+    modeloCelda.addCylinder({
+
         start: {
             x: inicio[0],
             y: inicio[1],
@@ -456,33 +444,30 @@ aristas.forEach(arista => {
             z: final[2]
         },
 
-        color: "#888888"
+        radius: 0.065,
+        color: "#D62828"
+
     });
 
 });
 
 
 // ======================================
-// 6. AJUSTES DEL VISOR
+// 6. AJUSTAR EL VISOR
 // ======================================
-
-// Centrar y ajustar la estructura
 
 viewer.zoomTo();
 
 viewer.render();
 
 
-// Activar giro automático
+// ======================================
+// 7. GIRO AUTOMÁTICO
+// ======================================
 
 let girando = true;
 
 viewer.spin("y", 0.35);
-
-
-// ======================================
-// 7. BOTÓN DE GIRO
-// ======================================
 
 const botonGiro = document.getElementById("giro");
 
@@ -510,19 +495,16 @@ botonGiro.addEventListener("click", function() {
 
 
 // ======================================
-// 8. BOTÓN DE LA CELDA UNIDAD
+// 8. MOSTRAR Y OCULTAR LA CELDA
 // ======================================
 
-const botonCelda = document.getElementById("celda");
-
 let mostrarCelda = true;
+
+const botonCelda = document.getElementById("celda");
 
 botonCelda.addEventListener("click", function() {
 
     mostrarCelda = !mostrarCelda;
-
-    // Solo se oculta o muestra la figura del cubo.
-    // Los iones pertenecen a otro modelo y no se modifican.
 
     modeloCelda.hidden = !mostrarCelda;
 
@@ -542,7 +524,7 @@ botonCelda.addEventListener("click", function() {
 
 
 // ======================================
-// 9. AJUSTE DEL VISOR AL CAMBIAR TAMAÑO
+// 9. ADAPTACIÓN DEL VISOR
 // ======================================
 
 window.addEventListener("resize", function() {
