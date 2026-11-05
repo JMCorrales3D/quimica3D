@@ -3,6 +3,7 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -63,8 +64,13 @@ html, body {
     vertical-align: middle;
 }
 
-.na { background: #7658C8; }
-.cl { background: #54A6C5; }
+.na {
+    background: #7658C8;
+}
+
+.cl {
+    background: #54A6C5;
+}
 
 .controles {
     position: fixed;
@@ -72,6 +78,8 @@ html, body {
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
+    display: flex;
+    gap: 8px;
 }
 
 button {
@@ -102,7 +110,12 @@ button:hover {
     z-index: 1000;
 }
 
+.credito:hover {
+    color: #8a6fd1;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -126,8 +139,15 @@ Cloruro de sodio (NaCl)
 <div id="viewer"></div>
 
 <div class="controles">
-<button id="rotacion">⏸ Detener giro</button>
-<button id="celda">Ocultar celda unidad</button>
+
+<button id="rotacion">
+⏸ Detener giro
+</button>
+
+<button id="celda">
+Ocultar celda unidad
+</button>
+
 </div>
 
 <a class="credito"
@@ -140,15 +160,21 @@ Química3D · Juana Mª Corrales
 
 <script>
 
+// VISOR 3D
+
 const viewer = $3Dmol.createViewer("viewer", {
     backgroundColor: "white"
 });
 
-// Parámetro de red aproximado del NaCl (Å)
+
+// PARÁMETRO DE RED DEL NaCl
+
 const a = 5.64;
 
-// Posiciones de la estructura tipo sal gema
-// Aniones Cl-: red CFC
+
+// POSICIONES DE LOS IONES Cl-
+// Red cúbica centrada en las caras
+
 const cloro = [
     [0,0,0],
     [0,0.5,0.5],
@@ -156,7 +182,10 @@ const cloro = [
     [0.5,0.5,0]
 ];
 
-// Cationes Na+: posiciones octaédricas
+
+// POSICIONES DE LOS IONES Na+
+// Huecos octaédricos
+
 const sodio = [
     [0.5,0,0],
     [0,0.5,0],
@@ -164,116 +193,204 @@ const sodio = [
     [0.5,0.5,0.5]
 ];
 
-// Crear varias celdas para visualizar
-// la continuidad de la red cristalina
+
+// CONSTRUCCIÓN DE LA RED CRISTALINA
 
 for (let i = -1; i <= 1; i++) {
+
     for (let j = -1; j <= 1; j++) {
+
         for (let k = -1; k <= 1; k++) {
 
             cloro.forEach(p => {
 
                 viewer.addSphere({
+
                     center: {
                         x: (i+p[0])*a,
                         y: (j+p[1])*a,
                         z: (k+p[2])*a
                     },
+
                     radius: 1.15,
                     color: "#54A6C5"
+
                 });
 
             });
 
+
             sodio.forEach(p => {
 
                 viewer.addSphere({
+
                     center: {
                         x: (i+p[0])*a,
                         y: (j+p[1])*a,
                         z: (k+p[2])*a
                     },
+
                     radius: 0.78,
                     color: "#7658C8"
+
                 });
 
             });
 
         }
+
     }
+
 }
 
-// Dibujar la celda unidad central
 
-let mostrarCelda = true;
+// CELDA UNIDAD CENTRAL
 
 const esquinas = [
-    [0,0,0], [a,0,0],
-    [a,a,0], [0,a,0],
-    [0,0,a], [a,0,a],
-    [a,a,a], [0,a,a]
+
+    [0,0,0],
+    [a,0,0],
+    [a,a,0],
+    [0,a,0],
+
+    [0,0,a],
+    [a,0,a],
+    [a,a,a],
+    [0,a,a]
+
 ];
+
 
 const aristas = [
-    [0,1],[1,2],[2,3],[3,0],
-    [4,5],[5,6],[6,7],[7,4],
-    [0,4],[1,5],[2,6],[3,7]
+
+    [0,1],
+    [1,2],
+    [2,3],
+    [3,0],
+
+    [4,5],
+    [5,6],
+    [6,7],
+    [7,4],
+
+    [0,4],
+    [1,5],
+    [2,6],
+    [3,7]
+
 ];
 
+
+// GUARDAMOS LAS LÍNEAS DE LA CELDA
+
+let lineasCelda = [];
+
 function dibujarCelda() {
+
+    lineasCelda = [];
 
     aristas.forEach(e => {
 
         const p1 = esquinas[e[0]];
         const p2 = esquinas[e[1]];
 
-        viewer.addLine({
-            start: {x:p1[0], y:p1[1], z:p1[2]},
-            end: {x:p2[0], y:p2[1], z:p2[2]},
+        const linea = viewer.addLine({
+
+            start: {
+                x: p1[0],
+                y: p1[1],
+                z: p1[2]
+            },
+
+            end: {
+                x: p2[0],
+                y: p2[1],
+                z: p2[2]
+            },
+
             color: "#888888",
             linewidth: 2
+
         });
+
+        lineasCelda.push(linea);
 
     });
 
 }
 
+
+// DIBUJAR CELDA INICIAL
+
+let mostrarCelda = true;
+
 dibujarCelda();
 
 viewer.zoomTo();
+
 viewer.render();
 
-// Giro automático
+
+// ROTACIÓN AUTOMÁTICA
+
 let girando = true;
 
 viewer.spin("y", 0.5);
 
-// Botón para detener y reanudar
+
+// BOTÓN DE ROTACIÓN
+
 document.getElementById("rotacion").onclick = function() {
 
     if (girando) {
+
         viewer.spin(false);
+
         this.textContent = "▶ Reanudar giro";
+
     } else {
+
         viewer.spin("y", 0.5);
+
         this.textContent = "⏸ Detener giro";
+
     }
 
     girando = !girando;
+
 };
 
-// Mostrar u ocultar celda unidad
+
+// BOTÓN MOSTRAR / OCULTAR CELDA
+
 document.getElementById("celda").onclick = function() {
 
     if (mostrarCelda) {
-        viewer.removeAllShapes();
+
+        // Eliminar únicamente las líneas del cubo
+
+        lineasCelda.forEach(linea => {
+
+            viewer.removeShape(linea);
+
+        });
+
+        lineasCelda = [];
+
         this.textContent = "Mostrar celda unidad";
+
     } else {
+
+        // Volver a dibujar el cubo
+
         dibujarCelda();
+
         this.textContent = "Ocultar celda unidad";
+
     }
 
     mostrarCelda = !mostrarCelda;
+
     viewer.render();
 
 };
@@ -281,5 +398,5 @@ document.getElementById("celda").onclick = function() {
 </script>
 
 </body>
-</html>
 
+</html>
